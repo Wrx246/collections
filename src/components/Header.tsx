@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [search, setSearch] = useState<string>('')
-    const navigation = useNavigate();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        navigation('/login')
+        navigate('/login')
     }
 
     return (
