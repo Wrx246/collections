@@ -1,8 +1,11 @@
 import React from 'react'
+import Modal from '../components/Modal'
 
 const Main = () => {
   return (
-    <div>Main</div>
+    <Modal>
+      Main
+    </Modal>
   )
 }
 

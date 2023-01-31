@@ -1,38 +1,34 @@
 import { useState } from 'react'
 import { NavLink } from "react-router-dom";
-import { Form } from 'react-bootstrap'
-import Button from 'react-bootstrap/esm/Button'
+import { Button, Input, FormLabel, FormControl } from '@mui/material';
+import '../styles/Auth.css'
 
 const Login = () => {
     const [name, setName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     return (
-        <Form className='w-25 d-flex gap-4 flex-column'>
+        <form className='form'>
             <h2>Login</h2>
-            <Form.Group>
-                <Form.Label>
-                    Username
-                </Form.Label>
-                <Form.Control
+            <FormControl className='form-input'>
+                <FormLabel>Username</FormLabel>
+                <Input
                     type='text'
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     placeholder='Enter name' />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>
-                    Password
-                </Form.Label>
-                <Form.Control
+            </FormControl>
+            <FormControl className='form-input'>
+                <FormLabel>Password</FormLabel>
+                <Input
                     type='password'
                     value={password}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     placeholder='Enter password' />
-            </Form.Group>
-            <Button variant='primary'>Login</Button>
+            </FormControl>
+            <Button variant='contained'>Login</Button>
             <span>No account? <NavLink to='/registration'>Registration</NavLink></span>
-        </Form>
+        </form>
     )
 }
 

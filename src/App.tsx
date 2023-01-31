@@ -1,15 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
 import Login from './pages/Login';
 import Main from './pages/Main';
 import ProtectedRoutes from './pages/ProtectedRoutes';
 import Registration from './pages/Registration';
+import './styles/App.css'
 
 function App() {
   return (
-    <Container
-      className='d-flex justify-content-center align-items-center'
-      style={{ height: '100vh' }}>
+    <div className='container'>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
@@ -17,7 +15,7 @@ function App() {
           <Route path="/" element={<Main />} />
         </Route>
       </Routes>
-    </Container>
+    </div>
   );
 }
 
