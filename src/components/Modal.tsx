@@ -1,4 +1,5 @@
 import Header from "./Header"
+import '../styles/Modal.css'
 
 type ModalTypes = {
     children: string | JSX.Element | JSX.Element[]
@@ -6,7 +7,7 @@ type ModalTypes = {
 
 const Modal = ({children}: ModalTypes) => {
     return (
-        <div>
+        <div className="modal">
             <Header />
             {children}
         </div>
