@@ -5,7 +5,7 @@ import { themeChanger } from '../store/theme-actions';
 import { themeStorage } from '../constants/storage';
 
 export const SwitchWidget = () => {
-    const [checked, setChecked] = useState<boolean>(themeStorage)
+    const [checked, setChecked] = useState<boolean>(themeStorage || false)
 
     const dispatch = useAppDispatch()
 
