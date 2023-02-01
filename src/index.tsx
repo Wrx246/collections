@@ -7,13 +7,16 @@ import { setupStore } from './store';
 
 const store = setupStore();
 
+
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      
+        <App />
     </Provider>
   </BrowserRouter>
 );

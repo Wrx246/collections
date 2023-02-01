@@ -1,4 +1,4 @@
-import { memberTypes } from "./../../models/types";
+import { memberTypes } from "../../shared/models/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {

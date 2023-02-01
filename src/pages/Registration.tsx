@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button, TextField, Grid } from '@mui/material';
+import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useForm } from "react-hook-form";
 import '../shared/styles/Auth.css'
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../shared/hooks/redux';
 import { fetchRegistration } from '../store/auth/auth-actions';
 
 type FormData = {
@@ -21,7 +21,7 @@ const Registration = () => {
         handleSubmit,
         formState: { errors },
         reset } = useForm<FormData>({ mode: 'onBlur' });
-        
+
     const onSubmit = handleSubmit(data => {
         dispatch(fetchRegistration({
             name: data.userName,
@@ -43,7 +43,7 @@ const Registration = () => {
             component="form"
             onSubmit={onSubmit}
         >
-            <h2>Registration</h2>
+            <Typography variant="h4">Registration</Typography>
             <TextField
                 fullWidth
                 error={!!errors?.userName}
@@ -76,7 +76,7 @@ const Registration = () => {
                 label="Confirm Password"
                 variant="standard" />
             {error ? <span className='form-error'>{error}</span> : null}
-            <Button sx={{ m: '1.5rem' }} variant='contained' type='submit'>Registration</Button>
+            <Button sx={{ m: '1.5rem' }} variant='contained' color="primary" type='submit'>Registration</Button>
             <span>Already have account? <NavLink to="/login">Login</NavLink></span>
         </Grid>
     )

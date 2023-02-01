@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button, TextField, Grid } from '@mui/material';
+import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useForm } from "react-hook-form";
 import '../shared/styles/Auth.css'
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../shared/hooks/redux';
 import { fetchLogin } from '../store/auth/auth-actions';
 
 type FormData = {
@@ -37,7 +37,7 @@ const Login = () => {
             component="form"
             onSubmit={onSubmit}
         >
-            <h2>Login</h2>
+            <Typography variant="h4">Login</Typography>
             <TextField
                 fullWidth
                 error={!!errors?.userName}
