@@ -1,37 +1,36 @@
-import { memberTypes } from "../../shared/models/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthState {
+interface LoginState {
   token: string;
   isLoading: boolean;
   error: string;
 }
 
-const initialState: AuthState = {
+const initialState: LoginState = {
   token: '',
   isLoading: false,
   error: "",
 };
 
-export const authSlice = createSlice({
-  name: "auth",
+export const loginSlice = createSlice({
+  name: "login",
   initialState,
   reducers: {
-    authFetching(state) {
+    loginFetching(state) {
       state.isLoading = true;
     },
-    authFetchingSuccess(state, action: PayloadAction<string>) {
+    loginFetchingSuccess(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = "";
       state.token = action.payload;
     },
-    authFetchingError(state, action: PayloadAction<string>) {
+    loginFetchingError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },
   },
 });
 
-export default authSlice.reducer;
+export const loginReducer = loginSlice.reducer;
 
-export const authActions = authSlice.actions;
+export const loginActions = loginSlice.actions;

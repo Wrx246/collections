@@ -22,14 +22,10 @@ function App() {
   const themeMode = useAppSelector(state => state.themeReducer.theme)
   const theme = createTheme({
     palette: {
-      mode: themeMode === true ? 'light' : 'dark',
+      mode: themeMode ? 'dark' : 'light',
       primary: {
         main: '#6954D6'
       },
-      // secondary: {
-      //   main: '#181818',
-      //   second: '#FFCC00'
-      // }
     }
   })
   return (

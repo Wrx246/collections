@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ThemeState {
   theme: boolean;
 }
 
 const initialState: ThemeState = {
-  theme: false,
+  theme: true,
 };
 
 export const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    themeChange(state) {
-      state.theme = !state.theme;
+    themeChange(state, action: PayloadAction<boolean>) {
+      state.theme = action.payload;
     },
   },
 });
