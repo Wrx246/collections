@@ -1,5 +1,5 @@
 import Header from "./Header"
-import '../styles/Modal.css'
+import '../shared/styles/Modal.css'
 
 type ModalTypes = {
     children: string | JSX.Element | JSX.Element[]

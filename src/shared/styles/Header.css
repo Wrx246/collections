@@ -18,3 +18,8 @@
 .header-search {
     width: 30%;
 }
+
+.header-buttons {
+    display: flex;
+    gap: 20px;
+}

@@ -1,4 +1,4 @@
-import { API } from "../../api/api";
+import { API } from "../../shared/api/api";
 import { AppDispatch } from "../index";
 import { authSlice } from "./auth-slice";
 

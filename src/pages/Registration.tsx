@@ -1,83 +1,84 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button, FormLabel, FormControl } from '@mui/material';
-import * as Yup from 'yup';
-import { Formik, Form, Field } from 'formik';
-import '../styles/Auth.css'
+import { Button, TextField, Grid } from '@mui/material';
+import { useForm } from "react-hook-form";
+import '../shared/styles/Auth.css'
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchRegistration } from '../store/auth/auth-actions';
+
+type FormData = {
+    userName: string;
+    email: string;
+    password: string;
+    confirm: string;
+};
 
 const Registration = () => {
     const error = useAppSelector(state => state.authSlice.error)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-
-    const SignupSchema = Yup.object().shape({
-        userName: Yup.string()
-            .min(2, 'minimum 2 characters')
-            .max(20, 'maximum 20 characters')
-            .required('Required'),
-        email: Yup.string().email('Invalid email').required('Required'),
-        password: Yup.string()
-            .min(5, 'minimum 5 characters')
-            .max(20, 'maximum 20 characters')
-            .required('This field is required'),
-        changepassword: Yup.string().when('password', {
-            is: (val: string) => (val && val.length > 0 ? true : false),
-            then: Yup.string().oneOf(
-                [Yup.ref('password')],
-                'Both password need to be the same'
-            )
-        })
-    })
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset } = useForm<FormData>({ mode: 'onBlur' });
+        
+    const onSubmit = handleSubmit(data => {
+        dispatch(fetchRegistration({
+            name: data.userName,
+            email: data.email,
+            password: data.password
+        },
+            navigate))
+        reset()
+    });
 
     return (
-        <Formik
-            initialValues={{
-                userName: '',
-                email: '',
-                password: '',
-                changepassword: '',
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={values => dispatch(fetchRegistration({ name: values.userName, email: values.email, password: values.password }, navigate))}
+        <Grid
+            container
+            direction="column"
+            rowGap={2}
+            style={{ maxWidth: '350px', minWidth: '100px' }}
+            justifyContent="center"
+            alignItems="center"
+            component="form"
+            onSubmit={onSubmit}
         >
-            {({ errors, touched, }) => (
-                <Form className='form'>
-                    <h2>Registration</h2>
-                    <FormControl className='form-body'>
-                        <FormLabel>Username</FormLabel>
-                        <Field className='form-input' name="userName" placeholder="Username" />
-                        {errors.userName && touched.userName ? (
-                            <span className='form-error'>{errors.userName}</span>
-                        ) : null}
-                    </FormControl>
-
-                    <FormControl className='form-body'>
-                        <FormLabel>Email</FormLabel>
-                        <Field className='form-input' name="email" type="email" placeholder="Email" />
-                        {errors.email && touched.email ?
-                            <span className='form-error'>{errors.email}</span> : null}
-                    </FormControl>
-
-                    <FormControl className='form-body'>
-                        <FormLabel>Password</FormLabel>
-                        <Field className='form-input' name="password" type="password" placeholder="Password" />
-                        {errors.password && touched.password ?
-                            <span className='form-error'>{errors.password}</span> : null}
-                    </FormControl>
-
-                    <FormControl className='form-body'>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <Field className='form-input' name="changepassword" type="password" placeholder="Confirm password" />
-                        {errors.changepassword && touched.changepassword ?
-                            <span className='form-error'>{errors.changepassword}</span> : null}
-                    </FormControl>
-                    {error ? <span className='form-error'>{error}</span> : null}
-                    <Button variant='contained' type='submit'>Registration</Button>
-                    <span>Already have account? <NavLink to="/login">Login</NavLink></span>
-                </Form>
-            )}
-        </Formik>
+            <h2>Registration</h2>
+            <TextField
+                fullWidth
+                error={!!errors?.userName}
+                id="standard-basic"
+                {...register("userName", { required: 'Required field!' })}
+                helperText={errors?.userName?.message}
+                label="Username" variant="standard" />
+            <TextField
+                fullWidth
+                error={!!errors?.email}
+                id="standard-basic"
+                {...register("email", { required: 'Required field!' })}
+                helperText={errors?.email?.message}
+                label="Email"
+                variant="standard" />
+            <TextField
+                fullWidth
+                error={!!errors?.password}
+                id="standard-basic"
+                {...register("password", { required: 'Required field!' })}
+                helperText={errors?.password?.message}
+                label="Password"
+                variant="standard" />
+            <TextField
+                fullWidth
+                error={!!errors?.confirm}
+                id="standard-basic"
+                {...register("confirm", { required: 'Required field!' })}
+                helperText={errors?.confirm?.message}
+                label="Confirm Password"
+                variant="standard" />
+            {error ? <span className='form-error'>{error}</span> : null}
+            <Button sx={{ m: '1.5rem' }} variant='contained' type='submit'>Registration</Button>
+            <span>Already have account? <NavLink to="/login">Login</NavLink></span>
+        </Grid>
     )
 }
 
