@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Switch } from '@mui/material';
 import { useAppDispatch } from '../../../shared/hooks/redux';
 import { themeChanger } from '../store/theme-actions';
-import { themeStorage } from '../constants/storage';
 
 export const SwitchWidget = () => {
-    const [checked, setChecked] = useState<boolean>(themeStorage || false)
+    const [checked, setChecked] = useState<boolean>(JSON.parse(localStorage.getItem('collection-theme') || 'false'))
 
     const dispatch = useAppDispatch()
 
