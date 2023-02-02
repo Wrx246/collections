@@ -3,9 +3,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { themeReducer } from './../modules/themeSwitcher/';
 import { registrationReducer } from './../modules/registrationForm/';
 import { loginReducer } from './../modules/loginForm/';
+import { collectionsReducer } from './../modules/collections/';
 
 const rootReducer = combineReducers({
-  themeReducer, registrationReducer, loginReducer
+  themeReducer, registrationReducer, loginReducer, collectionsReducer
 })
 
 export const setupStore = () => {
