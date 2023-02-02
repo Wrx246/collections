@@ -5,7 +5,7 @@ interface ThemeState {
 }
 
 const initialState: ThemeState = {
-  theme: true,
+  theme: false,
 };
 
 export const themeSlice = createSlice({

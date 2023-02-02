@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Modal from './components/Modal';
 import Login from './pages/Login';
@@ -13,7 +13,6 @@ import {
   registrationPath,
   userPath
 } from './shared/constants/Paths';
-import './shared/styles/App.css'
 import { useAppSelector } from './shared/hooks/redux';
 
 
@@ -26,12 +25,20 @@ function App() {
       primary: {
         main: '#6954D6'
       },
+      secondary: {
+        main: '#FFFFF'
+      }
     }
   })
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className='container'>
+      <Grid container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: '100vh' }}>
         <Routes>
           <Route path={loginPath} element={<Login />} />
           <Route path={registrationPath} element={<Registration />} />
@@ -40,7 +47,7 @@ function App() {
             <Route path={userPath} element={<Modal><User /></Modal>} />
           </Route>
         </Routes>
-      </div>
+      </Grid>
     </ThemeProvider>
   );
 }

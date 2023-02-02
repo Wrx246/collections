@@ -43,7 +43,7 @@ export const LoginForm = () => {
       <TextField
         fullWidth
         error={!!errors?.userName}
-        id="standard-basic"
+        id="standard-basic-user"
         {...register("userName", { required: "Required field!" })}
         helperText={errors?.userName?.message}
         label="Username"
@@ -53,14 +53,14 @@ export const LoginForm = () => {
       <TextField
         fullWidth
         error={!!errors?.password}
-        id="standard-basic"
+        id="standard-basic-password"
         {...register("password", { required: "Required field!" })}
         helperText={errors?.password?.message}
         type='password'
         label="Password"
         variant="standard"
       />
-      {error ? <span className="form-error">{error}</span> : null}
+      {error ? <span style={{color: 'red'}}>{error}</span> : null}
       <Button sx={{ m: "1.5rem" }} variant="contained" type="submit">
         Login
       </Button>

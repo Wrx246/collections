@@ -45,7 +45,7 @@ export const RegistrationForm = () => {
             <TextField
                 fullWidth
                 error={!!errors?.userName}
-                id="standard-basic"
+                id="standard-basic-user"
                 {...register("userName", { required: 'Required field!' })}
                 helperText={errors?.userName?.message}
                 type='text'
@@ -54,7 +54,7 @@ export const RegistrationForm = () => {
             <TextField
                 fullWidth
                 error={!!errors?.email}
-                id="standard-basic"
+                id="standard-basic-email"
                 {...register("email", { required: 'Required field!' })}
                 helperText={errors?.email?.message}
                 type='email'
@@ -63,7 +63,7 @@ export const RegistrationForm = () => {
             <TextField
                 fullWidth
                 error={!!errors?.password}
-                id="standard-basic"
+                id="standard-basic-password"
                 {...register("password", { required: 'Required field!' })}
                 helperText={errors?.password?.message}
                 type='password'
@@ -72,13 +72,13 @@ export const RegistrationForm = () => {
             <TextField
                 fullWidth
                 error={!!errors?.confirm}
-                id="standard-basic"
+                id="standard-basic-confirm"
                 {...register("confirm", { required: 'Required field!' })}
                 helperText={errors?.confirm?.message}
                 type='password'
                 label="Confirm Password"
                 variant="standard" />
-            {error ? <span className='form-error'>{error}</span> : null}
+            {error ? <span style={{color: 'red'}}>{error}</span> : null}
             <Button sx={{ m: '1.5rem' }} variant='contained' color="primary" type='submit'>Registration</Button>
             <span>Already have account? <NavLink to="/login">Login</NavLink></span>
         </Grid>
