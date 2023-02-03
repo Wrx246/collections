@@ -19,7 +19,6 @@ import { useAppDispatch, useAppSelector } from './shared/hooks/redux';
 import locales from './shared/constants/Locales';
 import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
-import { localStorageKeys } from './shared/constants/Storage';
 import { setLocale } from './modules/localization/store/action';
 
 
@@ -29,10 +28,10 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!localStorage.getItem(localStorageKeys.LOCALE)) {
-      localStorage.setItem(localStorageKeys.LOCALE, locales.EN)
+    if (!localStorage.getItem('app.locale')) {
+      localStorage.setItem('app.locale', locales.EN)
     } else {
-      dispatch(setLocale(localStorage.getItem(localStorageKeys.LOCALE) || locales.EN))
+      dispatch(setLocale(JSON.parse(localStorage.getItem("app.locale") || locales.EN)))
     }
   }, [])
 

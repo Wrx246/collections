@@ -1,4 +1,4 @@
 export const user = JSON.parse(localStorage.getItem("user-data") || "");
-export const localStorageKeys = {
-  LOCALE: "app.locale",
-};
+// export const localStorageKeys = {
+//   LOCALE: "app.locale",
+// };
