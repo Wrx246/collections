@@ -28,7 +28,7 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!JSON.parse(JSON.stringify(localStorage.getItem('app.locale'))).length) {
+    if (!JSON.parse(JSON.stringify(localStorage.getItem('app.locale')))) {
       localStorage.setItem('app.locale', locales.EN)
     } else {
       dispatch(setLocale(JSON.parse(JSON.stringify(localStorage.getItem('app.locale'))) || locales.EN))
