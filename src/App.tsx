@@ -31,7 +31,7 @@ function App() {
     if (!localStorage.getItem('app.locale')) {
       localStorage.setItem('app.locale', locales.EN)
     } else {
-      dispatch(setLocale(JSON.parse(localStorage.getItem("app.locale") || locales.EN)))
+      dispatch(setLocale(localStorage.getItem("app.locale") || locales.EN))
     }
   }, [])
 
