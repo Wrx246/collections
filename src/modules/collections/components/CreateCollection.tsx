@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../shared/hooks/redux'
 import { themes } from '../constants/theme'
 import { Tags } from './Tags'
 import { fetchCreate } from '../store/actions'
-import { user } from '../../../shared/constants/Storage'
 
 type ModalType = {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -41,6 +40,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
     } = useForm<FormData>({ mode: "onBlur" });
 
     const onSubmit = handleSubmit((data) => {
+        let user = JSON.parse(JSON.stringify(localStorage.getItem("user-data")))
         dispatch(fetchCreate({...data, tags: tags, userId: user.id}));
         setModal(false)
         setTags([])
