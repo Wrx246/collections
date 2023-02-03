@@ -1,4 +1,4 @@
-import localStorageKeys from "../../../shared/constants/Storage";
+import {localStorageKeys} from "../../../shared/constants/Storage";
 import { AppDispatch } from "../../../store";
 import { localeSlice } from "./slice";
 

@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from './shared/hooks/redux';
 import locales from './shared/constants/Locales';
 import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
-import localStorageKeys from './shared/constants/Storage';
+import { localStorageKeys } from './shared/constants/Storage';
 import { setLocale } from './modules/localization/store/action';
 
 
