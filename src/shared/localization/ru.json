@@ -1,0 +1,22 @@
+{
+  "app.header.home-button": "Главная",
+  "app.header.logout-button": "Выйти",
+  "app.header.search": "Поиск коллекций",
+  "app.header.locale": "Язык",
+  "app.user-page.body.collections": "Коллекции",
+  "app.user-page.body.items": "Элементы",
+  "app.login-page.header": "Логин",
+  "app.login-page.user-name": "Имя пользователя",
+  "app.login-page.password": "Пароль",
+  "app.login-page.button": "ВОЙТИ",
+  "app.login-page.text": "Нет аккаунта?",
+  "app.login-page.link": "Регистрация",
+  "app.registration-page.header": "Регистрация",
+  "app.registration-page.user-name": "Имя пользователя",
+  "app.registration-page.email": "Почта",
+  "app.registration-page.password": "Пароль",
+  "app.registration-page.confirm": "Подтвердите пароль",
+  "app.registration-page.button": "РЕГИСТРАЦИЯ",
+  "app.registration-page.text": "Уже есть аккаунт?",
+  "app.registration-page.link": "Войти"
+}

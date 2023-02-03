@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import { Button, TextField, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../shared/hooks/redux";
 import { fetchLogin } from "../store/actions";
@@ -39,14 +40,16 @@ export const LoginForm = () => {
       component="form"
       onSubmit={onSubmit}
     >
-      <Typography variant="h4">Login</Typography>
+      <Typography variant="h4">
+        <FormattedMessage id="app.login-page.header" />
+      </Typography>
       <TextField
         fullWidth
         error={!!errors?.userName}
         id="standard-basic-user"
         {...register("userName", { required: "Required field!" })}
         helperText={errors?.userName?.message}
-        label="Username"
+        label={<FormattedMessage id="app.login-page.user-name" />}
         type='text'
         variant="standard"
       />
@@ -57,15 +60,15 @@ export const LoginForm = () => {
         {...register("password", { required: "Required field!" })}
         helperText={errors?.password?.message}
         type='password'
-        label="Password"
+        label={<FormattedMessage id="app.login-page.password" />}
         variant="standard"
       />
-      {error ? <span style={{color: 'red'}}>{error}</span> : null}
+      {error ? <span style={{ color: 'red' }}>{error}</span> : null}
       <Button sx={{ m: "1.5rem" }} variant="contained" type="submit">
-        Login
+        <FormattedMessage id="app.login-page.button" />
       </Button>
       <span>
-        No account? <NavLink to="/registration">Registration</NavLink>
+        <FormattedMessage id="app.login-page.text" /> <NavLink to="/registration"><FormattedMessage id="app.login-page.link" /></NavLink>
       </span>
     </Grid>
   );

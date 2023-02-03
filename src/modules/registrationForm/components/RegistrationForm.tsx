@@ -1,6 +1,7 @@
-import { Button, Grid, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { Button, Grid, TextField, Typography } from '@mui/material'
+import { FormattedMessage } from "react-intl";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchRegistration } from '../store/actions';
 
@@ -41,7 +42,9 @@ export const RegistrationForm = () => {
             component="form"
             onSubmit={onSubmit}
         >
-            <Typography variant="h4">Registration</Typography>
+            <Typography variant="h4">
+                <FormattedMessage id="app.registration-page.header" />
+            </Typography>
             <TextField
                 fullWidth
                 error={!!errors?.userName}
@@ -49,7 +52,7 @@ export const RegistrationForm = () => {
                 {...register("userName", { required: 'Required field!' })}
                 helperText={errors?.userName?.message}
                 type='text'
-                label="Username"
+                label={<FormattedMessage id="app.registration-page.user-name" />}
                 variant="standard" />
             <TextField
                 fullWidth
@@ -58,7 +61,7 @@ export const RegistrationForm = () => {
                 {...register("email", { required: 'Required field!' })}
                 helperText={errors?.email?.message}
                 type='email'
-                label="Email"
+                label={<FormattedMessage id="app.registration-page.email" />}
                 variant="standard" />
             <TextField
                 fullWidth
@@ -67,7 +70,7 @@ export const RegistrationForm = () => {
                 {...register("password", { required: 'Required field!' })}
                 helperText={errors?.password?.message}
                 type='password'
-                label="Password"
+                label={<FormattedMessage id="app.registration-page.password" />}
                 variant="standard" />
             <TextField
                 fullWidth
@@ -76,11 +79,16 @@ export const RegistrationForm = () => {
                 {...register("confirm", { required: 'Required field!' })}
                 helperText={errors?.confirm?.message}
                 type='password'
-                label="Confirm Password"
+                label={<FormattedMessage id="app.registration-page.confirm" />}
                 variant="standard" />
-            {error ? <span style={{color: 'red'}}>{error}</span> : null}
-            <Button sx={{ m: '1.5rem' }} variant='contained' color="primary" type='submit'>Registration</Button>
-            <span>Already have account? <NavLink to="/login">Login</NavLink></span>
+            {error ? <span style={{ color: 'red' }}>{error}</span> : null}
+            <Button sx={{ m: '1.5rem' }} variant='contained' color="primary" type='submit'>
+                <FormattedMessage id="app.registration-page.button" />
+            </Button>
+            <span><FormattedMessage id="app.registration-page.text" />
+                <NavLink to="/login">
+                    <FormattedMessage id="app.registration-page.link" />
+                </NavLink></span>
         </Grid>
     )
 }

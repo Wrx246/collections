@@ -4,9 +4,10 @@ import { themeReducer } from './../modules/themeSwitcher/';
 import { registrationReducer } from './../modules/registrationForm/';
 import { loginReducer } from './../modules/loginForm/';
 import { collectionsReducer } from './../modules/collections/';
+import { localeReducer } from './../modules/localization/';
 
 const rootReducer = combineReducers({
-  themeReducer, registrationReducer, loginReducer, collectionsReducer
+  themeReducer, registrationReducer, loginReducer, collectionsReducer, localeReducer
 })
 
 export const setupStore = () => {

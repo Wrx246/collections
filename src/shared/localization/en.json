@@ -1,0 +1,22 @@
+{
+  "app.header.home-button": "HOME",
+  "app.header.logout-button": "Logout",
+  "app.header.search": "Search collections",
+  "app.header.locale": "Locale",
+  "app.user-page.body.collections": "Collections",
+  "app.user-page.body.items": "Items",
+  "app.login-page.header": "Login",
+  "app.login-page.user-name": "Username",
+  "app.login-page.password": "Password",
+  "app.login-page.button": "LOGIN",
+  "app.login-page.text": "No account?",
+  "app.login-page.link": "Registration",
+  "app.registration-page.header": "Registration",
+  "app.registration-page.user-name": "Username",
+  "app.registration-page.email": "Email",
+  "app.registration-page.password": "Password",
+  "app.registration-page.confirm": "Confirm Password",
+  "app.registration-page.button": "REGISTRATION",
+  "app.registration-page.text": "Already have account?",
+  "app.registration-page.link": "Login"
+}

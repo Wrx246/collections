@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
+import { FormattedMessage } from "react-intl";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchCollections } from '../store/actions'
 import { CollectionFolder } from './CollectionFolder'
@@ -20,7 +21,9 @@ export const Collections = () => {
     return (
         <Grid container direction='column'>
             <Grid item container direction='row' justifyContent='space-between'>
-                <Typography sx={{ fontWeight: 700 }} variant='h6'>Collections</Typography>
+                <Typography sx={{ fontWeight: 700 }} variant='h6'>
+                    <FormattedMessage id="app.user-page.body.collections" />
+                </Typography>
                 <CreateButton setModal={setModal} modal={modal} />
             </Grid>
             <CreateCollection modal={modal} setModal={setModal} />

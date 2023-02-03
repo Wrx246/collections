@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { FormattedMessage } from "react-intl";
 import { homePath } from '../../../shared/constants/Paths'
 
 export const HomeButton = () => {
@@ -10,7 +11,9 @@ export const HomeButton = () => {
 
     return (
         <Button color='secondary' onClick={handleHome}>
-            <Typography variant='h6'>Home</Typography>
+            <Typography variant='h6'>
+                <FormattedMessage id="app.header.home-button" />
+            </Typography>
         </Button>
     )
 }
