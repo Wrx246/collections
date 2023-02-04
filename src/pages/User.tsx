@@ -1,6 +1,5 @@
 import { Grid, Typography } from '@mui/material'
 import React from 'react'
-import { FormattedMessage } from "react-intl";
 import { Collections } from '../modules/collections'
 import { Items } from '../modules/items';
 
