@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import FolderIcon from '@mui/icons-material/Folder';
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import { Grid, Typography } from '@mui/material';
+import { Fab, Grid, Typography } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { CollectionType } from '../models/collection';
+import { useAppDispatch } from '../../../shared/hooks/redux';
+import { useNavigate } from 'react-router-dom';
+import { userPath } from '../../../shared/constants/Paths';
 
 type FolderType = {
-    name: string,
+    collections: CollectionType,
 }
 
-export const CollectionFolder = ({ name }: FolderType) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+export const CollectionFolder = ({ collections }: FolderType) => {
+    const navigate = useNavigate()
 
     const style = [
         {
@@ -19,14 +23,12 @@ export const CollectionFolder = ({ name }: FolderType) => {
             }
         },
         {
-            pt: 2,
-            pl: 2,
-            backgroundColor: isOpen ? '#6954D6' : 'transparent'
+            p: 2,
         }
     ]
 
     const handleOpen = () => {
-        setIsOpen(!isOpen)
+        navigate(`${userPath}/${collections.id}`)
     }
 
     return (
@@ -34,13 +36,22 @@ export const CollectionFolder = ({ name }: FolderType) => {
             sx={style}
             gap={1}
             direction="row"
-            alignItems="start"
-            justifyContent="start"
+            alignItems="center"
+            justifyContent="space-between"
             onClick={handleOpen}>
-            <Grid item alignItems='center'>
-                {isOpen ? <FolderOpenIcon /> : <FolderIcon />}
+            <Grid item container sx={{ maxWidth: '20%' }} alignItems='center' gap={1}>
+                <FolderIcon />
+                <Grid item >
+                    <Typography component='span' sx={{fontWeight: 700}}>{collections.title}</Typography>
+                    <br />
+                    <Typography component='span'>{collections.theme}</Typography>
+                </Grid>
             </Grid>
-            <Typography component='span'>{name}</Typography>
+            <Grid item>
+                <Fab variant='circular' sx={{ maxWidth: 35, maxHeight: 15 }} aria-label="delete">
+                    <DeleteForeverIcon />
+                </Fab>
+            </Grid>
         </Grid>
     )
 }

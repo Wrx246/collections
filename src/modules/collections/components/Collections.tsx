@@ -18,8 +18,10 @@ export const Collections = () => {
         dispatch(fetchCollections(user.id))
     }, [])
 
+
+
     return (
-        <Grid container direction='column'>
+        <Grid container direction='column' sx={{pt: 2}}>
             <Grid item container direction='row' justifyContent='space-between'>
                 <Typography sx={{ fontWeight: 700 }} variant='h6'>
                     <FormattedMessage id="app.user-page.body.collections" />
@@ -29,7 +31,7 @@ export const Collections = () => {
             <CreateCollection modal={modal} setModal={setModal} />
             <Grid item container direction='column' sx={{ mt: 2 }}>
                 {collections.map(c => (
-                    <CollectionFolder key={c.id} name={c.title} />
+                    <CollectionFolder key={c.id} collections={c} />
                 ))}
             </Grid>
         </Grid>
