@@ -2,6 +2,7 @@ import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import { FormattedMessage } from "react-intl";
 import { Collections } from '../modules/collections'
+import { Items } from '../modules/items';
 
 const User = () => {
     return (
@@ -10,9 +11,7 @@ const User = () => {
                 <Collections />
             </Grid>
             <Grid item xl={10} lg={10} md={9} sm={8} xs={7} sx={{ pt: 2, pl: 4, bgcolor: '#4F8F9' }}>
-                <Typography sx={{ fontWeight: 700 }} variant='h6'>
-                    <FormattedMessage id="app.user-page.body.items" />
-                </Typography>
+                <Items />
             </Grid>
         </Grid>
     )
