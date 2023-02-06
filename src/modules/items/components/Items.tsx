@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { Grid, Typography, CircularProgress, Box } from "@mui/material";
+import { Grid, Typography, CircularProgress } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { useParams } from 'react-router-dom';
 import { SettingsBar } from "./SettingsBar";

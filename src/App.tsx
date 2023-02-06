@@ -12,6 +12,7 @@ import User from './pages/User';
 import {
   collectionPath,
   homePath,
+  itemPath,
   loginPath,
   registrationPath,
   userPath
@@ -22,6 +23,7 @@ import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
 import Collection from './pages/Collection';
+import Item from './pages/Item';
 
 
 
@@ -72,6 +74,7 @@ function App() {
               <Route path={homePath} element={<Modal><Main /></Modal>} />
               <Route path={userPath} element={<Modal><User /></Modal>} />
               <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
+              <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
             </Route>
           </Routes>
         </Grid>
