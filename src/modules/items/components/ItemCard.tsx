@@ -3,6 +3,7 @@ import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom';
 import { ItemType } from '../models/itemTypes'
 import { useAppDispatch } from '../../../shared/hooks/redux';
 import { fetchAddLike, fetchRemoveLike } from '../store/actions';
@@ -15,6 +16,7 @@ type CardType = {
 const ItemCard = ({ item }: CardType) => {
   const [isLike, setIsLike] = useState<boolean>(false)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   let date = moment(item.createdAt).format('MMMM Do YYYY')
 
   const handleLike = (e: React.MouseEvent) => {
@@ -24,6 +26,10 @@ const ItemCard = ({ item }: CardType) => {
     // } else {
     //   dispatch(fetchAddLike(item.id, setIsLike))
     // }
+  }
+
+  const handleItem = () => {
+    navigate(`/item/${item.id}`)
   }
 
   if(!item) {
@@ -60,7 +66,7 @@ const ItemCard = ({ item }: CardType) => {
           <Typography component='span' sx={{ pl: 1 }}>{item.likes}</Typography>
         </CardActions>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" onClick={handleItem}>Learn More</Button>
         </CardActions>
       </Grid>
     </Card>
