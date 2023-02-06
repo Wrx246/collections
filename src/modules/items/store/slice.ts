@@ -30,17 +30,17 @@ export const itemsSlice = createSlice({
       state.error = action.payload;
     },
     createFetching(state) {
-        state.isLoading = true;
+      state.isLoading = true;
     },
     createFetchingSuccess(state, action: PayloadAction<ItemType>) {
-        state.isLoading = false;
-        state.error = "";
-        state.items = [...state.items, action.payload];
+      state.isLoading = false;
+      state.error = "";
+      state.items = [...state.items, action.payload];
     },
     createFetchingError(state, action: PayloadAction<string>) {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 

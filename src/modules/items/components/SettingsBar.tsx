@@ -5,8 +5,18 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-export const SettingsBar = () => {
-    // const [sort, setSort] = useState<string>()
+
+type SettingsType = {
+    setModal: React.Dispatch<React.SetStateAction<boolean>>
+    modal: boolean
+}
+
+export const SettingsBar = ({ modal, setModal }: SettingsType) => {
+
+    const handleCreate = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setModal(!modal)
+      }
 
     return (
         <Grid container justifyContent='space-between' sx={{ pt: 3, pl: 3}}>
@@ -27,7 +37,7 @@ export const SettingsBar = () => {
                 </FormControl>
             </Grid>
             <Grid item>
-                <Button color='primary' variant='contained'>Add item</Button>
+                <Button color='primary' variant='contained' onClick={handleCreate}>Add item</Button>
             </Grid>
         </Grid>
     )

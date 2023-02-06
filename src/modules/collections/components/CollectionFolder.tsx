@@ -28,7 +28,8 @@ export const CollectionFolder = ({ collections }: FolderType) => {
     ]
 
     const handleOpen = () => {
-        navigate(`${userPath}/${collections.id}`)
+        navigate(`/${collections.id}`)
+        localStorage.setItem('collection', JSON.stringify(collections))
     }
 
     return (
