@@ -1,5 +1,5 @@
 export const loginPath = '/login'
 export const registrationPath = '/registration'
 export const userPath = '/user'
-export const collectionPath = '/user/:collectionId'
+export const collectionPath = '/:collectionId'
 export const homePath = '/'

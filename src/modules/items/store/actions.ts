@@ -5,7 +5,7 @@ import { itemsSlice } from "./slice";
 export const fetchItems = (id: number) => async (dispatch: AppDispatch) => {
   try {
     dispatch(itemsSlice.actions.itemsFetching());
-    const response = await API.get(`item/${id}`);
+    const response = await API.get(`item/collection/${id}`);
     dispatch(itemsSlice.actions.itemsFetchingSuccess(response.data.data));
   } catch (error: any) {
     dispatch(
@@ -20,12 +20,39 @@ type CreateType = {
   collectionId: number;
 };
 
-export const fetchCreate =
+export const fetchCreateItem =
   (options: CreateType) => async (dispatch: AppDispatch) => {
     try {
       dispatch(itemsSlice.actions.createFetching());
       const response = await API.post(`item/create`, options);
       dispatch(itemsSlice.actions.createFetchingSuccess(response.data.data));
+    } catch (error: any) {
+      dispatch(
+        itemsSlice.actions.createFetchingError(error.response.data.message)
+      );
+    }
+  };
+
+export const fetchAddLike = (id: number, setIsLike: (value: React.SetStateAction<boolean>) => void) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(itemsSlice.actions.createFetching());
+    const response = await API.post(`item/addLike`, { id: id });
+    dispatch(itemsSlice.actions.createFetchingSuccess(response.data.data));
+    setIsLike(true)
+  } catch (error: any) {
+    dispatch(
+      itemsSlice.actions.createFetchingError(error.response.data.message)
+    );
+  }
+};
+
+export const fetchRemoveLike =
+  (id: number, setIsLike: (value: React.SetStateAction<boolean>) => void) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(itemsSlice.actions.createFetching());
+      const response = await API.post(`item/removeLike`, { id: id });
+      dispatch(itemsSlice.actions.createFetchingSuccess(response.data.data));
+      setIsLike(false)
     } catch (error: any) {
       dispatch(
         itemsSlice.actions.createFetchingError(error.response.data.message)

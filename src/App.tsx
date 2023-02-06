@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -10,6 +10,7 @@ import ProtectedRoutes from './pages/ProtectedRoutes';
 import Registration from './pages/Registration';
 import User from './pages/User';
 import {
+  collectionPath,
   homePath,
   loginPath,
   registrationPath,
@@ -20,6 +21,7 @@ import locales from './shared/constants/Locales';
 import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
+import Collection from './pages/Collection';
 
 
 
@@ -69,6 +71,7 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route path={homePath} element={<Modal><Main /></Modal>} />
               <Route path={userPath} element={<Modal><User /></Modal>} />
+              <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
             </Route>
           </Routes>
         </Grid>
