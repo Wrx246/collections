@@ -4,6 +4,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from "react-intl";
 import { ItemType } from '../models/itemTypes'
 import { useAppDispatch } from '../../../shared/hooks/redux';
 import { fetchAddLike, fetchRemoveLike } from '../store/actions';
@@ -33,7 +34,7 @@ const ItemCard = ({ item }: CardType) => {
     navigate(`/item/${item.id}`)
   }
 
-  if(!item) {
+  if (!item) {
     return (
       <Scelet />
     )
@@ -43,7 +44,7 @@ const ItemCard = ({ item }: CardType) => {
     <Card sx={{ maxWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Created: {date}
+          <FormattedMessage id="app.item-card.body.created" />: {date}
         </Typography>
         <Typography variant="h5" component="div">
           {item.title}
@@ -67,7 +68,9 @@ const ItemCard = ({ item }: CardType) => {
           <Typography component='span' sx={{ pl: 1 }}>{item.likes}</Typography>
         </CardActions>
         <CardActions>
-          <Button size="small" onClick={handleItem}>Learn More</Button>
+          <Button size="small" onClick={handleItem}>
+            <FormattedMessage id="app.item-card.body.button" />
+          </Button>
         </CardActions>
       </Grid>
     </Card>

@@ -5,6 +5,19 @@
   "app.header.locale": "Locale",
   "app.user-page.body.collections": "Collections",
   "app.user-page.body.items": "Items",
+  "app.user-page.body.count": "items",
+  "app.user-page.body.sort": "Sort by",
+  "app.user-page.body.sort-date": "Date",
+  "app.user-page.body.sort-likes": "Likes",
+  "app.user-page.body.sort-comments": "Comments",
+  "app.user-page.body.add": "Add item",
+  "app.main-page.header.items": "Latest items",
+  "app.main-page.header.collections": "Popular collections",
+  "app.item-card.body.created": "Created",
+  "app.item-card.body.button": "Description",
+  "app.item-card.comment-write": "Write comment",
+  "app.item-card.comment-submit": "Submit",
+  "app.item-card.comment": "Comments",
   "app.login-page.header": "Login",
   "app.login-page.user-name": "Username",
   "app.login-page.password": "Password",
@@ -18,5 +31,6 @@
   "app.registration-page.confirm": "Confirm Password",
   "app.registration-page.button": "REGISTRATION",
   "app.registration-page.text": "Already have account?",
-  "app.registration-page.link": "Login"
+  "app.registration-page.link": "Login",
+  "app.components.back-button": "Back"
 }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Typography, Grid, List, CircularProgress } from '@mui/material'
+import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { Comment } from './Comment'
 import { CommentInput } from './CommentInput'
@@ -9,12 +10,12 @@ import { fetchComments } from '../store/actions'
 
 export const Comments = () => {
     const { comments, isLoading } = useAppSelector(state => state.commentsReducer)
-    const {itemId} = useParams()
+    const { itemId } = useParams()
     const dispatch = useAppDispatch()
 
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(fetchComments(Number(itemId)))
-    },[itemId])
+    }, [itemId])
 
     return (
         <Grid container direction='column' gap={3} sx={{ width: '100%', pt: 2 }}>
@@ -22,7 +23,9 @@ export const Comments = () => {
                 <CommentInput />
             </Grid>
             <Grid item>
-                <Typography variant='h5'>Comments</Typography>
+                <Typography variant='h5'>
+                    <FormattedMessage id="app.item-card.comment" />
+                </Typography>
                 <List
                     sx={{
                         width: '100%',

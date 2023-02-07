@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Typography, Grid, Box, Button } from '@mui/material'
 import moment from 'moment'
+import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchItem } from '../store/actions'
 import BackButton from '../../../shared/components/BackButton'
@@ -26,7 +27,7 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
                     {item?.title}
                 </Typography>
                 <Typography sx={{ color: 'GrayText' }} component='span'>
-                    Created: {date}
+                    <FormattedMessage id="app.item-card.body.created" />: {date}
                 </Typography>
             </Grid>
             <Grid item>
