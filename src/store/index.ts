@@ -6,6 +6,7 @@ import { loginReducer } from "./../modules/loginForm/";
 import { collectionsReducer } from "./../modules/collections/";
 import { localeReducer } from "./../modules/localization/";
 import { itemsReducer } from "./../modules/items/";
+import { commentsReducer } from './../modules/comments/';
 
 const rootReducer = combineReducers({
   themeReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   collectionsReducer,
   localeReducer,
   itemsReducer,
+  commentsReducer,
 });
 
 export const setupStore = () => {

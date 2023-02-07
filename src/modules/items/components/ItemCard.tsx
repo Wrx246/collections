@@ -29,6 +29,7 @@ const ItemCard = ({ item }: CardType) => {
   }
 
   const handleItem = () => {
+    localStorage.setItem('item-id', String(item.id))
     navigate(`/item/${item.id}`)
   }
 
