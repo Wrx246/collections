@@ -9,7 +9,7 @@ interface CommentsState {
 }
 
 const initialState: CommentsState = {
-  comments: [{author: 'user', createdAt: '12.123', id: 1, text: '1234'}],
+  comments: [],
   isLoading: false,
   error: "",
 };
