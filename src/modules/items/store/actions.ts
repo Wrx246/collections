@@ -14,6 +14,18 @@ export const fetchItems = (id: number) => async (dispatch: AppDispatch) => {
   }
 };
 
+export const fetchItem = (id: number) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(itemsSlice.actions.itemFetching());
+    const response = await API.get(`item/collection/item/${id}`);
+    dispatch(itemsSlice.actions.itemFetchingSuccess(response.data.data));
+  } catch (error: any) {
+    dispatch(
+      itemsSlice.actions.itemFetchingError(error.response.data.message)
+    );
+  }
+};
+
 type CreateType = {
   title: string;
   tags: string[];

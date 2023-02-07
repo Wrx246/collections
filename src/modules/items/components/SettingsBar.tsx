@@ -4,6 +4,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import BackButton from '../../../shared/components/BackButton';
 
 
 type SettingsType = {
@@ -20,9 +21,10 @@ export const SettingsBar = ({ modal, setModal }: SettingsType) => {
 
     return (
         <Grid container justifyContent='space-between' sx={{ pt: 3, pl: 3}}>
-            <Grid item gap={2}>
-                <Typography component='span'>10 items</Typography>
-                <FormControl>
+            <Grid item>
+                <BackButton />
+                <Typography sx={{ ml: 3 }} component='span'>10 items</Typography>
+                <FormControl  sx={{ ml: 3 }}>
                     <InputLabel id="select-sort">Sort by</InputLabel>
                     <Select
                         sx={{ maxHeight: 35 }}

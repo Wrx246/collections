@@ -28,19 +28,20 @@ export const Items = () => {
                 <SettingsBar modal={modal} setModal={setModal} />
             </Grid>
             <CreateItem modal={modal} setModal={setModal} />
-            {isLoading && <Grid
+            {isLoading ? <Grid
                 container
                 padding={20}
                 spacing={0}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-            ><CircularProgress /></Grid>}
-            <Grid item container direction='row' justifyContent='center' gap={5} flexWrap='wrap' sx={{ mt: 2 }}>
-                {items.map(i => (
-                    <ItemCard key={i.id} item={i} />
-                ))}
-            </Grid>
+            ><CircularProgress /></Grid> :
+                <Grid item container direction='row' justifyContent='center' gap={5} flexWrap='wrap' sx={{ mt: 2 }}>
+                    {items.map(i => (
+                        <ItemCard key={i.id} item={i} />
+                    ))}
+                </Grid>
+            }
         </Grid>
     )
 }

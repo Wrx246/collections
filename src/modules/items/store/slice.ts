@@ -3,12 +3,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ItemsState {
   items: ItemType[];
+  item: ItemType | null;
   isLoading: boolean;
   error: string;
 }
 
 const initialState: ItemsState = {
   items: [],
+  item: null,
   isLoading: false,
   error: "",
 };
@@ -26,6 +28,18 @@ export const itemsSlice = createSlice({
       state.items = action.payload;
     },
     itemsFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    itemFetching(state) {
+      state.isLoading = true;
+    },
+    itemFetchingSuccess(state, action: PayloadAction<ItemType>) {
+      state.isLoading = false;
+      state.error = "";
+      state.item = action.payload;
+    },
+    itemFetchingError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },

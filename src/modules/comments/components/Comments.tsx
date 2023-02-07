@@ -17,7 +17,7 @@ export const Comments = () => {
     },[itemId])
 
     return (
-        <Grid container direction='column' gap={3} sx={{ width: '100%' }}>
+        <Grid container direction='column' gap={3} sx={{ width: '100%', pt: 2 }}>
             <Grid item>
                 <CommentInput />
             </Grid>
@@ -38,7 +38,7 @@ export const Comments = () => {
                         alignItems="center"
                         justifyContent="center"
                     ><CircularProgress /></Grid>}
-                    {comments.map(c => (
+                    {comments?.map(c => (
                         <Comment key={c.id} comment={c} />
                     ))}
                 </List>
