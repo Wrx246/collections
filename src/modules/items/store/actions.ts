@@ -26,6 +26,18 @@ export const fetchItem = (id: number) => async (dispatch: AppDispatch) => {
   }
 };
 
+export const fetchLatest = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(itemsSlice.actions.itemsFetching());
+    const response = await API.get(`item/latest`);
+    dispatch(itemsSlice.actions.itemsFetchingSuccess(response.data.data));
+  } catch (error: any) {
+    dispatch(
+      itemsSlice.actions.itemsFetchingError(error.response.data.message)
+    );
+  }
+};
+
 type CreateType = {
   title: string;
   tags: string[];

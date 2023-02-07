@@ -29,19 +29,20 @@ export const Collections = () => {
                 <CreateButton setModal={setModal} modal={modal} />
             </Grid>
             <CreateCollection modal={modal} setModal={setModal} />
-            <Grid item container direction='column' sx={{ mt: 2 }}>
-                {isLoading && <Grid
-                    container
-                    padding={20}
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                ><CircularProgress /></Grid>}
-                {collections.map(c => (
-                    <CollectionFolder key={c.id} collections={c} />
-                ))}
-            </Grid>
+            {isLoading ? <Grid
+                container
+                padding={20}
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            ><CircularProgress /></Grid>
+                : <Grid item container direction='column' sx={{ mt: 2 }}>
+                    {collections.map(c => (
+                        <CollectionFolder key={c.id} collections={c} />
+                    ))}
+                </Grid>
+            }
         </Grid>
     )
 }
