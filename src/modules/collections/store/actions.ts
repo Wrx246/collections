@@ -43,3 +43,22 @@ export const fetchCreate =
       );
     }
   };
+
+export const fetchDelete =
+  (id: number, userId: number) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(collectionsSlice.actions.collectionsFetching());
+      const response = await API.delete(`collection/delete`, {
+        data: { id: id, userId: userId },
+      });
+      dispatch(
+        collectionsSlice.actions.collectionsFetchingSuccess(response.data.data)
+      );
+    } catch (error: any) {
+      dispatch(
+        collectionsSlice.actions.collectionsFetchingError(
+          error.response.data.message
+        )
+      );
+    }
+  };
