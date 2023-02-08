@@ -1,1 +1,1 @@
-export const themes = ['Alcohol', 'Books', 'Movies', 'Music', 'Games']
+export const themes = ["Alcohol", "Books", "Movies", "Music", "Games"];

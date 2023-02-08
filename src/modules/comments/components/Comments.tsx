@@ -18,7 +18,7 @@ export const Comments = () => {
     }, [itemId])
 
     return (
-        <Grid container direction='column' gap={3} sx={{ width: '100%', pt: 2 }}>
+        <Grid container direction='column' gap={3} sx={{ width: '100%', pt: 2, mb: 2 }}>
             <Grid item>
                 <CommentInput />
             </Grid>

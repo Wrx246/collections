@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IntlProvider } from 'react-intl';
-import Modal from './components/Modal';
+import Modal from './shared/components/Modal';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import ProtectedRoutes from './pages/ProtectedRoutes';
@@ -70,11 +70,11 @@ function App() {
           <Routes>
             <Route path={loginPath} element={<Login />} />
             <Route path={registrationPath} element={<Registration />} />
+            <Route path={homePath} element={<Modal><Main /></Modal>} />
+            <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
+            <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
             <Route element={<ProtectedRoutes />}>
-              <Route path={homePath} element={<Modal><Main /></Modal>} />
               <Route path={userPath} element={<Modal><User /></Modal>} />
-              <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
-              <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
             </Route>
           </Routes>
         </Grid>

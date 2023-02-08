@@ -14,7 +14,7 @@ export const CommentInput = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
-    let user = JSON.parse(localStorage.getItem('user-data') || '')
+    let user = JSON.parse(JSON.stringify(localStorage.getItem('user-data')))
 
     const handleSubmit = (e: React.MouseEvent) => {
         e.preventDefault()
