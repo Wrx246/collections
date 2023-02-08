@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Typography, Grid, Box, Button } from '@mui/material'
+import { Typography, Grid, Box } from '@mui/material'
 import moment from 'moment'
 import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'

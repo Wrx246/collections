@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Grid, Modal, TextField, Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { useParams } from 'react-router-dom'
+import { FormattedMessage } from "react-intl"
 import { fetchCreateItem } from '../store/actions'
 
 type ModalType = {
@@ -45,7 +46,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
         setModal(false)
         setTitle('');
     };
-    
+
     return (
         <Modal
             open={modal}
@@ -60,18 +61,20 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                 justifyContent='center'
                 gap={2}>
                 <Typography sx={{ fontWeight: 600, fontSize: 23 }} component='h6'>
-                    Add item
+                    <FormattedMessage id="app.create-item.header" />
                 </Typography>
                 <TextField
                     fullWidth
                     id="outlined-title-item"
-                    label="Title"
+                    label={<FormattedMessage id="app.create.title" />}
                     color='primary'
                     variant="outlined"
                     type='text'
                     value={title}
                     onChange={handleChange} />
-                <Button color='primary' variant='contained' onClick={handleSubmit}>Create</Button>
+                <Button color='primary' variant='contained' onClick={handleSubmit}>
+                    <FormattedMessage id="app.create.button" />
+                </Button>
             </Grid>
         </Modal>
     )

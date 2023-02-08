@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material"
-import { Header } from '../modules/header'
+import { Header } from '../../modules/header'
 
 type ModalTypes = {
     children: string | JSX.Element | JSX.Element[]

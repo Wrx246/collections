@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { Grid, Typography, CircularProgress } from "@mui/material";
+import { Grid, Typography, CircularProgress, useMediaQuery } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { useParams } from 'react-router-dom';
 import { SettingsBar } from "./SettingsBar";
@@ -10,6 +10,7 @@ import { fetchItems } from '../store/actions';
 import { CreateItem } from './CreateItem';
 
 export const Items = () => {
+    const matches = useMediaQuery('(min-width:700px)');
     const dispatch = useAppDispatch()
     const { collectionId } = useParams()
     const [modal, setModal] = useState<boolean>(false)
@@ -36,7 +37,14 @@ export const Items = () => {
                 alignItems="center"
                 justifyContent="center"
             ><CircularProgress /></Grid> :
-                <Grid item container direction='row' justifyContent='center' gap={5} flexWrap='wrap' sx={{ mt: 2 }}>
+                <Grid
+                    item
+                    container
+                    direction='row'
+                    justifyContent={matches ? 'start' : 'center'}
+                    gap={5}
+                    flexWrap='wrap'
+                    sx={{ mt: 2, mb: 2 }}>
                     {items.map(i => (
                         <ItemCard key={i.id} item={i} />
                     ))}

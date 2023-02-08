@@ -1,6 +1,18 @@
-import React, {useState} from 'react'
-import { Button, FormControl, Grid, InputLabel, MenuItem, Modal, Select, TextField, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import {
+    Button,
+    FormControl,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Modal,
+    Select,
+    TextField,
+    Typography,
+    useMediaQuery
+} from '@mui/material'
 import { useForm } from 'react-hook-form'
+import { FormattedMessage } from "react-intl"
 import { useAppDispatch } from '../../../shared/hooks/redux'
 import { themes } from '../constants/theme'
 import { Tags } from './Tags'
@@ -17,18 +29,10 @@ type FormData = {
     theme: string
 };
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-};
+
 
 export const CreateCollection = ({ modal, setModal }: ModalType) => {
+    const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>([])
     const handleClose = () => setModal(false);
     const dispatch = useAppDispatch()
@@ -39,9 +43,20 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         reset,
     } = useForm<FormData>({ mode: "onBlur" });
 
+    const style = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        boxShadow: 24,
+        p: 4,
+    };
+
     const onSubmit = handleSubmit((data) => {
         let user = JSON.parse(JSON.stringify(localStorage.getItem("user-data")))
-        dispatch(fetchCreate({...data, tags: tags, userId: user.id}));
+        dispatch(fetchCreate({ ...data, tags: tags, userId: user.id }));
         setModal(false)
         setTags([])
         reset();
@@ -55,6 +70,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         >
             <Grid
                 sx={style}
+                maxWidth={matches ? 400 : 300}
                 container
                 alignItems='center'
                 justifyContent='center'
@@ -62,12 +78,12 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                 component="form"
                 onSubmit={onSubmit}>
                 <Typography sx={{ fontWeight: 600, fontSize: 23 }} component='h6'>
-                    Create collection
+                    <FormattedMessage id="app.create.header" />
                 </Typography>
                 <TextField
                     fullWidth
                     id="outlined-title"
-                    label="Title"
+                    label={<FormattedMessage id="app.create.title" />}
                     color='primary'
                     variant="outlined"
                     type='text'
@@ -77,7 +93,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                 <TextField
                     fullWidth
                     id="outlined-description"
-                    label="Description"
+                    label={<FormattedMessage id="app.create.description" />}
                     color='primary'
                     variant="outlined"
                     type='text'
@@ -85,7 +101,9 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                     {...register("description", { required: "Required field!" })}
                     helperText={errors?.description?.message} />
                 <FormControl fullWidth>
-                    <InputLabel id="select-label">Theme</InputLabel>
+                    <InputLabel id="select-label">
+                        <FormattedMessage id="app.create.theme" />
+                    </InputLabel>
                     <Select
                         labelId="select-label"
                         id="select"
@@ -99,7 +117,9 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                     </Select>
                 </FormControl>
                 <Tags tags={tags} setTags={setTags} />
-                <Button color='primary' variant='contained' type='submit'>Create</Button>
+                <Button color='primary' variant='contained' type='submit'>
+                    <FormattedMessage id="app.create.button" />
+                </Button>
             </Grid>
         </Modal>
     )

@@ -1,6 +1,7 @@
 {
   "app.header.home-button": "HOME",
   "app.header.logout-button": "Logout",
+  "app.header.login-button": "Login",
   "app.header.search": "Search collections",
   "app.header.locale": "Locale",
   "app.user-page.body.collections": "Collections",
@@ -32,5 +33,12 @@
   "app.registration-page.button": "REGISTRATION",
   "app.registration-page.text": "Already have account?",
   "app.registration-page.link": "Login",
+  "app.create.header": "Create collection",
+  "app.create.title": "Title",
+  "app.create.description": "Description",
+  "app.create.theme": "Theme",
+  "app.create.button": "Create",
+  "app.create-item.header": "Add item",
+  "app.burger.home": "Home",
   "app.components.back-button": "Back"
 }
