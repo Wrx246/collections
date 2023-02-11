@@ -6,7 +6,7 @@ export const fetchCollections =
   (id: number) => async (dispatch: AppDispatch) => {
     try {
       dispatch(collectionsSlice.actions.collectionsFetching());
-      const response = await API.get(`collection/${id}`);
+      const response = await API.get(`collection/current/${id}`);
       dispatch(
         collectionsSlice.actions.collectionsFetchingSuccess(response.data.data)
       );
@@ -62,3 +62,19 @@ export const fetchDelete =
       );
     }
   };
+
+  export const fetchPopular = () => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(collectionsSlice.actions.collectionsFetching());
+      const response = await API.get(`collection/popular`);
+      dispatch(
+        collectionsSlice.actions.collectionsFetchingSuccess(response.data.data)
+      );
+    } catch (error: any) {
+      dispatch(
+        collectionsSlice.actions.collectionsFetchingError(
+          error.response.data.message
+        )
+      );
+    }
+  }
