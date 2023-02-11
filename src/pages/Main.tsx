@@ -1,5 +1,6 @@
 import { Box, Divider, Typography, useMediaQuery } from '@mui/material'
 import { FormattedMessage } from "react-intl"
+import { Popular } from '../modules/collections';
 import { LatestItems } from '../modules/items'
 
 const Main = () => {
@@ -14,6 +15,7 @@ const Main = () => {
       <Typography sx={{ pt: 2 }} variant={matches ? 'h4' : 'h6'}>
         <FormattedMessage id="app.main-page.header.collections" />
       </Typography>
+      <Popular />
     </Box>
   )
 }

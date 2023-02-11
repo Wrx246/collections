@@ -42,7 +42,7 @@ export const Comments = () => {
                         justifyContent="center"
                     ><CircularProgress /></Grid>}
                     {comments?.map(c => (
-                        <Comment key={c.id} comment={c} />
+                        <Comment key={Number(c.id)} comment={c} />
                     ))}
                 </List>
             </Grid>
