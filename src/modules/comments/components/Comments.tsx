@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Typography, Grid, List, CircularProgress } from '@mui/material'
+import { Typography, Grid, CircularProgress, Paper } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { Comment } from './Comment'
 import { CommentInput } from './CommentInput'
 import { fetchComments } from '../store/actions'
+import { commentsSlice } from '../store/slice'
 
 
 export const Comments = () => {
@@ -14,7 +15,11 @@ export const Comments = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchComments(Number(itemId)))
+        const interval = setInterval(() => dispatch(fetchComments(Number(itemId))), 3000);
+        return () => {
+            clearInterval(interval)
+            dispatch(commentsSlice.actions.commentsFetchingSuccess([]))
+        }
     }, [itemId])
 
     return (
@@ -26,25 +31,20 @@ export const Comments = () => {
                 <Typography variant='h5'>
                     <FormattedMessage id="app.item-card.comment" />
                 </Typography>
-                <List
-                    sx={{
-                        width: '100%',
-                        maxWidth: 360,
-                        bgcolor: 'background.paper',
-                    }}
-                >
-                    {isLoading && <Grid
-                        container
-                        padding={20}
-                        spacing={0}
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                    ><CircularProgress /></Grid>}
-                    {comments?.map(c => (
-                        <Comment key={Number(c.id)} comment={c} />
-                    ))}
-                </List>
+                {isLoading && !comments ? <Grid
+                    container
+                    padding={20}
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                ><CircularProgress /></Grid> :
+                    <Paper style={{ padding: "20px 20px" }}>
+                        {comments?.map(c => (
+                            <Comment key={Number(c.id)} comment={c} />
+                        ))}
+                    </Paper>
+                }
             </Grid>
         </Grid>
     )
