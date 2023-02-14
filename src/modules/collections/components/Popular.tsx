@@ -10,9 +10,9 @@ export const Popular = () => {
     const dispatch = useAppDispatch()
     const { collections, isLoading } = useAppSelector(state => state.collectionsReducer)
 
-    useEffect(() => {
-        dispatch(fetchPopular())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(fetchPopular())
+    // }, [])
 
     return (
         <>
@@ -28,9 +28,9 @@ export const Popular = () => {
                     {!collections && <Typography variant="h6">
                         <FormattedMessage id="app.main-page.collections-not-found" />
                     </Typography>}
-                    {collections?.map(c => (
+                    {/* {collections?.map(c => (
                         <CollectionCard collection={c} />
-                    ))}
+                    ))} */}
                 </Grid>}
         </>
     )

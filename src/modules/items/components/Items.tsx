@@ -7,7 +7,7 @@ import { SettingsBar } from "./SettingsBar";
 import ItemCard from "./ItemCard";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux';
 import { fetchItems } from '../store/actions';
-import { CreateItem } from './CreateItem';
+import { CreateItem } from './createItem/CreateItem';
 
 export const Items = () => {
     const matches = useMediaQuery('(min-width:700px)');

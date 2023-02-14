@@ -55,6 +55,18 @@ export const itemsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    updateFetching(state) {
+      state.isLoading = true;
+    },
+    updateFetchingSuccess(state, action: PayloadAction<ItemType>) {
+      state.isLoading = false;
+      state.error = "";
+      state.items = [...state.items.map(i => i.id === action.payload.id ? i = action.payload : i)];
+    },
+    updateFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 

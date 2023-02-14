@@ -20,13 +20,19 @@ const ItemCard = ({ item }: CardType) => {
   const navigate = useNavigate()
   let date = moment(item.createdAt).format('MMMM Do YYYY')
 
+  let user = JSON.parse(localStorage.getItem('user-data') || 'false')
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault()
-    // if(isLike === true) {
-    //   dispatch(fetchRemoveLike(item.id, setIsLike))
-    // } else {
-    //   dispatch(fetchAddLike(item.id, setIsLike))
-    // }
+    const options = {
+      userId: Number(user.id),
+      id: item.id,
+      setIsLike: setIsLike
+    }
+    if (item.likes.includes(Number(user.id))) {
+      dispatch(fetchRemoveLike(options))
+    } else {
+      dispatch(fetchAddLike(options))
+    }
   }
 
   const handleItem = () => {
@@ -56,17 +62,18 @@ const ItemCard = ({ item }: CardType) => {
             </Typography>
           ))}
         </Box>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        {/* <Typography variant="body2">
+          {item?.description}
         </Typography>
+        <Typography variant="body2">
+          Author: {item?.author}
+        </Typography> */}
       </CardContent>
       <Grid container justifyContent='space-between' sx={{ pl: 1 }}>
-        <CardActions sx={{ cursor: 'pointer' }} onClick={handleLike}>
+        <Button sx={{ cursor: 'pointer' }} disabled={!user.id} onClick={handleLike}>
           {isLike ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           <Typography component='span' sx={{ pl: 1 }}>{item.likes}</Typography>
-        </CardActions>
+        </Button>
         <CardActions>
           <Button size="small" onClick={handleItem}>
             <FormattedMessage id="app.item-card.body.button" />
