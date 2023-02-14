@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { FormattedMessage } from "react-intl";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchCollections } from '../store/actions'
+import { CollectionCard } from './CollectionCard';
 import { CollectionFolder } from './CollectionFolder'
 import { CreateButton } from './CreateButton'
 import { CreateCollection } from './CreateCollection'
@@ -41,7 +42,7 @@ export const Collections = () => {
             ><CircularProgress /></Grid>
                 : <Grid item container direction='column' sx={{ mt: 2 }}>
                     {collections.map(c => (
-                        <CollectionFolder key={c.id} collections={c} />
+                        <CollectionCard key={c.id} collection={c} />
                     ))}
                 </Grid>
             }

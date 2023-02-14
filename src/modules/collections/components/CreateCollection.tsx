@@ -56,7 +56,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
 
     const onSubmit = handleSubmit((data) => {
         let user = JSON.parse(JSON.stringify(localStorage.getItem("user-data")))
-        dispatch(fetchCreate({ ...data, tags: tags, userId: user.id }));
+        dispatch(fetchCreate({ ...data, tags: tags, userId: Number(user.id) }));
         setModal(false)
         setTags([])
         reset();
