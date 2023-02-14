@@ -68,7 +68,7 @@ export const fetchDelete =
       dispatch(collectionsSlice.actions.collectionsFetching());
       const response = await API.get(`collection/popular`);
       dispatch(
-        collectionsSlice.actions.collectionsFetchingSuccess(response.data.data)
+        collectionsSlice.actions.collectionsFetchingSuccess(response.data.collections)
       );
     } catch (error: any) {
       dispatch(
