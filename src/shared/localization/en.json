@@ -39,6 +39,8 @@
   "app.create.header": "Create collection",
   "app.create.title": "Title",
   "app.create.description": "Description",
+  "app.create.date": "Date",
+  "app.create.author": "Author",
   "app.create.theme": "Theme",
   "app.create.button": "Create",
   "app.create-item.header": "Add item",

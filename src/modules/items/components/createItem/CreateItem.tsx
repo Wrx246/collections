@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Grid, Modal, TextField, Typography } from '@mui/material'
-import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
+import { Button, Grid, Modal, Typography } from '@mui/material'
+import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/redux'
 import { useParams } from 'react-router-dom'
 import { FormattedMessage } from "react-intl"
-import { fetchCreateItem } from '../store/actions'
+import { fetchCreateItem } from '../../store/actions'
+import { CreateField } from './CreateField'
 
 type ModalType = {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -31,21 +32,29 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
     const [collection] = useState(storageColl.tags)
 
     const [title, setTitle] = useState<string>('')
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value)
-    }
+    const [date, setDate] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+    const [author, setAuthor] = useState<string>('')
+    const [show, setShow] = useState<boolean>(!modal)
 
     const handleSubmit = (e: React.MouseEvent) => {
         e.preventDefault()
         dispatch(fetchCreateItem({
             title: title,
+            // author: author,
+            // description: description,
+            // date: date,
             tags: collection,
             collectionId: Number(collectionId)
         }));
         setModal(false)
         setTitle('');
     };
+
+    const handleShow = (e: React.MouseEvent) => {
+        e.preventDefault()
+        setShow(false)
+    }
 
     return (
         <Modal
@@ -63,15 +72,33 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                 <Typography sx={{ fontWeight: 600, fontSize: 23 }} component='h6'>
                     <FormattedMessage id="app.create-item.header" />
                 </Typography>
-                <TextField
-                    fullWidth
-                    id="outlined-title-item"
-                    label={<FormattedMessage id="app.create.title" />}
-                    color='primary'
-                    variant="outlined"
+                <CreateField
                     type='text'
                     value={title}
-                    onChange={handleChange} />
+                    fieldId='outlined-title-item'
+                    label="app.create.title"
+                    setValue={setTitle} />
+                {show && <Button fullWidth onClick={handleShow} variant="text">More options</Button>}
+                {!show && <>
+                    <CreateField
+                        type='date'
+                        value={date}
+                        fieldId='outlined-date-item'
+                        setValue={setDate} />
+                    <CreateField
+                        type='text'
+                        value={description}
+                        fieldId='outlined-description-item'
+                        label="app.create.description"
+                        setValue={setDescription} />
+                    <CreateField
+                        type='text'
+                        value={author}
+                        fieldId='outlined-author-item'
+                        label="app.create.author"
+                        setValue={setAuthor} />
+                </>
+                }
                 <Button color='primary' variant='contained' onClick={handleSubmit}>
                     <FormattedMessage id="app.create.button" />
                 </Button>

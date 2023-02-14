@@ -15,7 +15,9 @@ export const Collections = () => {
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        dispatch(fetchCollections(user.id))
+        if (user !== 'false') {
+            dispatch(fetchCollections(user.id))
+        }
     }, [])
 
 

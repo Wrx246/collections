@@ -3,7 +3,7 @@ import { Button, useMediaQuery, Grid, Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FormattedMessage } from "react-intl";
 import BackButton from '../../../shared/components/BackButton';
 import { useAppSelector } from '../../../shared/hooks/redux';
@@ -18,6 +18,7 @@ type SettingsType = {
 export const SettingsBar = ({ modal, setModal }: SettingsType) => {
     const matches = useMediaQuery('(max-width:700px)');
     const items = useAppSelector(state => state.itemsReducer.items)
+    const [sort, setSort] = useState<string>("Date added")
 
     const handleCreate = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -52,7 +53,8 @@ export const SettingsBar = ({ modal, setModal }: SettingsType) => {
                                 sx={{ maxHeight: 35, minWidth: 120 }}
                                 labelId="select-label"
                                 id="select"
-                                defaultValue="Date added"
+                                value={sort}
+                                onChange={(e: SelectChangeEvent) => setSort(e.target.value)}
                                 label={<FormattedMessage id="app.user-page.body.sort" />}>
                                 <MenuItem value='Date added'>
                                     <FormattedMessage id="app.user-page.body.sort-date" />
