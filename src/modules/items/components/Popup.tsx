@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IconButton, Button, Menu, MenuItem, FormControl, InputLabel, Select } from '@mui/material';
+import { IconButton, Button, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FormattedMessage } from "react-intl";
 
@@ -46,29 +46,6 @@ export const Popup = ({ handleCreate, handleDelete }: PopupTypes) => {
                     },
                 }}
             >
-                <MenuItem onClick={handleClose}>
-                    <FormControl>
-                        <InputLabel id="select-sort">
-                            <FormattedMessage id="app.user-page.body.sort" />
-                        </InputLabel>
-                        <Select
-                            sx={{ maxHeight: 35, minWidth: 120 }}
-                            labelId="select-label"
-                            id="select"
-                            defaultValue="Date added"
-                            label={<FormattedMessage id="app.user-page.body.sort" />}>
-                            <MenuItem value='Date added'>
-                                <FormattedMessage id="app.user-page.body.sort-date" />
-                            </MenuItem>
-                            <MenuItem value='Likes'>
-                                <FormattedMessage id="app.user-page.body.sort-likes" />
-                            </MenuItem>
-                            <MenuItem value='Comments'>
-                                <FormattedMessage id="app.user-page.body.sort-comments" />
-                            </MenuItem>
-                        </Select>
-                    </FormControl>
-                </MenuItem>
                 <MenuItem>
                     <Button color='primary' variant='contained' onClick={handleCreate}>
                         <FormattedMessage id="app.user-page.body.add" />
