@@ -27,7 +27,7 @@ export const CollectionCard = ({ collection }: CardType) => {
     }
 
     return (
-        <Card sx={{ maxWidth: 290 }}>
+        <Card sx={{ width: 240 }}>
             <CardMedia
                 sx={{ height: 140 }}
                 image="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"

@@ -58,6 +58,24 @@ export const fetchCreateItem =
     }
   };
 
+  interface DeleteType {
+    id: number;
+    collectionId: number
+  }
+
+export const fetchDeleteItem =
+  (options: DeleteType) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(itemsSlice.actions.itemsFetching());
+      const response = await API.delete(`item/delete`, {data: options});
+      dispatch(itemsSlice.actions.itemsFetchingSuccess(response.data.data));
+    } catch (error: any) {
+      dispatch(
+        itemsSlice.actions.itemsFetchingError(error.response.data.message)
+      );
+    }
+  };
+
 interface LikeTypes {
   userId: number;
   id: number;
@@ -69,7 +87,10 @@ export const fetchAddLike =
     try {
       const { id, userId, setIsLike } = options;
       dispatch(itemsSlice.actions.updateFetching());
-      const response = await API.put(`item/addLike`, { id: id, userId: userId });
+      const response = await API.put(`item/addLike`, {
+        id: id,
+        userId: userId,
+      });
       dispatch(itemsSlice.actions.updateFetchingSuccess(response.data.data));
       setIsLike(true);
     } catch (error: any) {
@@ -84,7 +105,10 @@ export const fetchRemoveLike =
     try {
       const { id, userId, setIsLike } = options;
       dispatch(itemsSlice.actions.updateFetching());
-      const response = await API.put(`item/removeLike`, { id: id, userId: userId });
+      const response = await API.put(`item/removeLike`, {
+        id: id,
+        userId: userId,
+      });
       dispatch(itemsSlice.actions.updateFetchingSuccess(response.data.data));
       setIsLike(false);
     } catch (error: any) {

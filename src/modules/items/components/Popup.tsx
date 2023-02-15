@@ -5,10 +5,11 @@ import { FormattedMessage } from "react-intl";
 
 type PopupTypes = {
     handleCreate: (e: React.MouseEvent<HTMLButtonElement>) => void
+    handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 
-export const Popup = ({handleCreate}: PopupTypes) => {
+export const Popup = ({ handleCreate, handleDelete }: PopupTypes) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -71,6 +72,11 @@ export const Popup = ({handleCreate}: PopupTypes) => {
                 <MenuItem>
                     <Button color='primary' variant='contained' onClick={handleCreate}>
                         <FormattedMessage id="app.user-page.body.add" />
+                    </Button>
+                </MenuItem>
+                <MenuItem>
+                    <Button color='primary' variant='contained' onClick={handleDelete}>
+                        <FormattedMessage id="app.user-page.body.delete" />
                     </Button>
                 </MenuItem>
             </Menu>

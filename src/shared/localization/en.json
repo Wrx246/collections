@@ -12,6 +12,7 @@
   "app.user-page.body.sort-likes": "Likes",
   "app.user-page.body.sort-comments": "Comments",
   "app.user-page.body.add": "Add item",
+  "app.user-page.body.delete": "Delete item",
   "app.main-page.header.items": "Latest items",
   "app.main-page.header.collections": "Popular collections",
   "app.main-page.collections-not-found": "Not found collections",
@@ -44,6 +45,7 @@
   "app.create.theme": "Theme",
   "app.create.button": "Create",
   "app.create-item.header": "Add item",
+  "app.delete-item.header": "Delete item",
   "app.burger.home": "Home",
   "app.components.back-button": "Back"
 }

@@ -12,6 +12,7 @@
   "app.user-page.body.sort-likes": "Лайкам",
   "app.user-page.body.sort-comments": "Комментариям",
   "app.user-page.body.add": "Добавить",
+  "app.user-page.body.delete": "Удалить",
   "app.main-page.header.items": "Последние элементы",
   "app.main-page.header.collections": "Популярные коллекции",
   "app.main-page.collections-not-found": "Коллекции не найдены",
@@ -44,6 +45,7 @@
   "app.create.theme": "Тема",
   "app.create.button": "Создать",
   "app.create-item.header": "Создать элемент",
+  "app.delete-item.header": "Удалить элемент",
   "app.burger.home": "Главная",
   "app.components.back-button": "Назад"
 }
