@@ -11,6 +11,6 @@ export const AvatarButton = () => {
         navigate(userPath)
     }
     return (
-        <Avatar onClick={handleAvatar}>{name}</Avatar>
+        <Avatar sx={{":hover": { cursor: 'pointer'}}} onClick={handleAvatar}>{name}</Avatar>
     )
 }

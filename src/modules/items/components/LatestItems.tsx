@@ -24,7 +24,7 @@ export const LatestItems = () => {
                 justifyContent="center"
             ><CircularProgress /></Grid> :
                 <Grid container flexWrap='wrap' justifyContent={matches ? 'start' : 'center'} gap={2} sx={{ mt: 2, mb: 2 }}>
-                    {items?.map(i => (
+                    {items?.slice(0, 5).map(i => (
                         <ItemCard key={i.id} item={i} />
                     ))}
                 </Grid>}

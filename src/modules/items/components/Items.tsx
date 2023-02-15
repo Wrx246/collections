@@ -4,11 +4,11 @@ import { Grid, Typography, CircularProgress, useMediaQuery } from "@mui/material
 import { FormattedMessage } from "react-intl";
 import { useParams } from 'react-router-dom';
 import { SettingsBar } from "./SettingsBar";
-import ItemCard from "./ItemCard";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux';
 import { fetchItems } from '../store/actions';
 import { CreateItem } from './createItem/CreateItem';
 import { DeleteItem } from './deleteItem/DeleteItem';
+import { ItemTable } from './ItemTable';
 
 export const Items = () => {
     const matches = useMediaQuery('(min-width:700px)');
@@ -52,9 +52,7 @@ export const Items = () => {
                     gap={5}
                     flexWrap='wrap'
                     sx={{ mt: 2, mb: 2 }}>
-                    {items.map(i => (
-                        <ItemCard key={i.id} item={i} />
-                    ))}
+                    <ItemTable items={items} />
                 </Grid>
             }
         </Grid>
