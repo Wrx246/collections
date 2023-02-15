@@ -8,12 +8,14 @@ import ItemCard from "./ItemCard";
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux';
 import { fetchItems } from '../store/actions';
 import { CreateItem } from './createItem/CreateItem';
+import { DeleteItem } from './deleteItem/DeleteItem';
 
 export const Items = () => {
     const matches = useMediaQuery('(min-width:700px)');
     const dispatch = useAppDispatch()
     const { collectionId } = useParams()
     const [modal, setModal] = useState<boolean>(false)
+    const [modalDelete, setModalDelete] = useState<boolean>(false)
     const { items, isLoading } = useAppSelector(state => state.itemsReducer)
 
     useEffect(() => {
@@ -26,9 +28,14 @@ export const Items = () => {
                 <Typography sx={{ fontWeight: 700 }} variant='h6'>
                     <FormattedMessage id="app.user-page.body.items" />
                 </Typography>
-                <SettingsBar modal={modal} setModal={setModal} />
+                <SettingsBar
+                    modal={modal}
+                    setModal={setModal}
+                    modalDelete={modalDelete}
+                    setModalDelete={setModalDelete} />
             </Grid>
             <CreateItem modal={modal} setModal={setModal} />
+            <DeleteItem modalDelete={modalDelete} setModalDelete={setModalDelete} />
             {isLoading ? <Grid
                 container
                 padding={20}

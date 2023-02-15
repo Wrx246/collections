@@ -13,9 +13,11 @@ import { Popup } from './Popup';
 type SettingsType = {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
     modal: boolean
+    setModalDelete: React.Dispatch<React.SetStateAction<boolean>>
+    modalDelete: boolean
 }
 
-export const SettingsBar = ({ modal, setModal }: SettingsType) => {
+export const SettingsBar = ({ modal, setModal, modalDelete, setModalDelete }: SettingsType) => {
     const matches = useMediaQuery('(max-width:700px)');
     const items = useAppSelector(state => state.itemsReducer.items)
     const [sort, setSort] = useState<string>("Date added")
@@ -23,6 +25,11 @@ export const SettingsBar = ({ modal, setModal }: SettingsType) => {
     const handleCreate = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setModal(!modal)
+    }
+
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setModalDelete(!modalDelete)
     }
 
     return (
@@ -35,7 +42,7 @@ export const SettingsBar = ({ modal, setModal }: SettingsType) => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <Popup handleCreate={handleCreate} />
+                    <Popup handleCreate={handleCreate} handleDelete={handleDelete} />
                 </Grid>
             </>
                 :
@@ -69,8 +76,11 @@ export const SettingsBar = ({ modal, setModal }: SettingsType) => {
                         </FormControl>
                     </Grid>
                     <Grid item>
-                        <Button color='primary' variant='contained' onClick={handleCreate}>
+                        <Button sx={{marginX: 2}} color='primary' variant='contained' onClick={handleCreate}>
                             <FormattedMessage id="app.user-page.body.add" />
+                        </Button>
+                        <Button color='primary' variant='contained' onClick={handleDelete}>
+                            <FormattedMessage id="app.user-page.body.delete" />
                         </Button>
                     </Grid>
                 </>
