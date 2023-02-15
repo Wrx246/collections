@@ -17,6 +17,7 @@
   "app.main-page.header.collections": "Popular collections",
   "app.main-page.collections-not-found": "Not found collections",
   "app.item-card.body.created": "Created",
+  "app.item-card.body.tags": "Tags",
   "app.item-card.body.button": "Description",
   "app.item-card.comment-write": "Write comment",
   "app.item-card.comment-submit": "Submit",

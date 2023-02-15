@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Typography, Grid, Box } from '@mui/material'
+import { Typography, Grid, Chip } from '@mui/material'
 import moment from 'moment'
 import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
@@ -20,9 +20,8 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
     }, [itemId])
 
     return (
-        <Grid container direction='row' justifyContent='space-between'>
-            <Grid item>
-                <BackButton />
+        <Grid container direction='column' gap={3} justifyContent='space-between' marginBottom={5}>
+            <Grid item container direction='column'>
                 <Typography sx={{ fontSize: 35 }} component='h2'>
                     {item?.title}
                 </Typography>
@@ -30,15 +29,12 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
                     <FormattedMessage id="app.item-card.body.created" />: {date}
                 </Typography>
             </Grid>
-            <Grid item>
-                <Box component='img' sx={{
-                    height: 233,
-                    width: 350,
-                    maxHeight: { xs: 167, md: 167, sm: 350, lg: 450, xl: 550 },
-                    maxWidth: { xs: 250, md: 250, sm: 350, lg: 450, xl: 550 },
-                }}
-                    alt="The house from the offer."
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2" />
+            <Grid item container direction='column' gap={3}>
+                <Typography component='p' sx={{fontSize: 20}}>
+                    <FormattedMessage id="app.item-card.body.tags" />: <br/>
+                    {item?.tags.map((t) => <Chip key={t} label={t} variant="outlined" sx={{marginRight: 3, fontSize: 17}} />)}
+                </Typography>
+                <BackButton />
             </Grid>
         </Grid>
     )

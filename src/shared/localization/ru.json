@@ -17,6 +17,7 @@
   "app.main-page.header.collections": "Популярные коллекции",
   "app.main-page.collections-not-found": "Коллекции не найдены",
   "app.item-card.body.created": "Создано",
+  "app.item-card.body.tags": "Теги",
   "app.item-card.body.button": "Детали",
   "app.item-card.comment-write": "Напишите комментарий",
   "app.item-card.comment-submit": "Отправить",

@@ -11,7 +11,7 @@ const BackButton = () => {
     }
 
     return (
-        <Button variant='contained' color='primary' onClick={handleBack}>
+        <Button sx={{maxWidth: 35}} variant='contained' color='primary' onClick={handleBack}>
             <FormattedMessage id="app.components.back-button" />
         </Button>
     )
