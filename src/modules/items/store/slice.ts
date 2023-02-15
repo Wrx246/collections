@@ -67,6 +67,18 @@ export const itemsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    sortLikesItems(state) {
+        const sorted = state.items.sort((a, b) => b.likes.length - a.likes.length)
+        state.items = sorted
+    },
+    sortDateItems(state) {
+      const sorted = state.items.sort((a, b) => a.createdAt > b.createdAt ? 1 : -1)
+      state.items = sorted
+    },
+    sortTitleItems(state) {
+      const sorted = state.items.sort((a, b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+      state.items = sorted
+    }
   },
 });
 

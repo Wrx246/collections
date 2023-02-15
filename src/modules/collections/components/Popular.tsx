@@ -29,7 +29,7 @@ export const Popular = () => {
                         <FormattedMessage id="app.main-page.collections-not-found" />
                     </Typography>}
                     {collections?.map(c => (
-                        <CollectionCard collection={c} />
+                        <CollectionCard key={c.id} collection={c} />
                     ))}
                 </Grid>}
         </>

@@ -10,7 +10,7 @@
   "app.user-page.body.sort": "Sort by",
   "app.user-page.body.sort-date": "Date",
   "app.user-page.body.sort-likes": "Likes",
-  "app.user-page.body.sort-comments": "Comments",
+  "app.user-page.body.sort-title": "Title",
   "app.user-page.body.add": "Add item",
   "app.user-page.body.delete": "Delete item",
   "app.main-page.header.items": "Latest items",

@@ -10,7 +10,7 @@
   "app.user-page.body.sort": "Сортировать по",
   "app.user-page.body.sort-date": "Дате",
   "app.user-page.body.sort-likes": "Лайкам",
-  "app.user-page.body.sort-comments": "Комментариям",
+  "app.user-page.body.sort-title": "Названию",
   "app.user-page.body.add": "Добавить",
   "app.user-page.body.delete": "Удалить",
   "app.main-page.header.items": "Последние элементы",
