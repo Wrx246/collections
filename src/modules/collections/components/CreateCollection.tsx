@@ -29,8 +29,6 @@ type FormData = {
     theme: string
 };
 
-
-
 export const CreateCollection = ({ modal, setModal }: ModalType) => {
     const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>([])
@@ -53,7 +51,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         boxShadow: 24,
         p: 4,
     };
-
+    
     const onSubmit = handleSubmit((data) => {
         let user = JSON.parse(localStorage.getItem("user-data") || '')
         dispatch(fetchCreate({ ...data, tags: tags, userId: Number(user.id) }));

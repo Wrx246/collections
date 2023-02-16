@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, CircularProgress, useMediaQuery } from '@mui/material'
+import { Grid, useMediaQuery } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchLatest } from '../store/actions'
 import ItemCard from './ItemCard'

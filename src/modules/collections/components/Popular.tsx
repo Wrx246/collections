@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, CircularProgress, useMediaQuery, Typography } from '@mui/material'
+import { Grid, useMediaQuery, Typography } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchPopular } from '../store/actions';
