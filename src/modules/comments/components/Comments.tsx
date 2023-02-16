@@ -7,6 +7,7 @@ import { Comment } from './Comment'
 import { CommentInput } from './CommentInput'
 import { fetchComments } from '../store/actions'
 import { commentsSlice } from '../store/slice'
+import Preloader from '../../../shared/components/Preloader'
 
 
 export const Comments = () => {
@@ -31,14 +32,7 @@ export const Comments = () => {
                 <Typography variant='h5'>
                     <FormattedMessage id="app.item-card.comment" />
                 </Typography>
-                {isLoading && !comments ? <Grid
-                    container
-                    padding={20}
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                ><CircularProgress /></Grid> :
+                {isLoading && !comments ? <Preloader /> :
                     <Paper style={{ padding: "20px 20px" }}>
                         {comments?.map(c => (
                             <Comment key={Number(c.id)} comment={c} />

@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IntlProvider } from 'react-intl';
 import Modal from './shared/components/Modal';
-import Login from './pages/Login';
-import Main from './pages/Main';
+import { Login, Main, Registration, User, Item, Collection } from './shared/components/Lazy';
 import ProtectedRoutes from './pages/ProtectedRoutes';
-import Registration from './pages/Registration';
-import User from './pages/User';
 import {
   collectionPath,
   homePath,
@@ -22,9 +19,7 @@ import locales from './shared/constants/Locales';
 import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
-import Collection from './pages/Collection';
-import Item from './pages/Item';
-
+import Preloader from './shared/components/Preloader';
 
 
 function App() {
@@ -67,16 +62,18 @@ function App() {
           alignItems="center"
           justifyContent="center"
           style={{ minHeight: '100vh' }}>
-          <Routes>
-            <Route path={loginPath} element={<Login />} />
-            <Route path={registrationPath} element={<Registration />} />
-            <Route path={homePath} element={<Modal><Main /></Modal>} />
-            <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
-            <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
-            <Route element={<ProtectedRoutes />}>
-              <Route path={userPath} element={<Modal><User /></Modal>} />
-            </Route>
-          </Routes>
+          <Suspense fallback={<Preloader />}>
+            <Routes>
+              <Route path={loginPath} element={<Login />} />
+              <Route path={registrationPath} element={<Registration />} />
+              <Route path={homePath} element={<Modal><Main /></Modal>} />
+              <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
+              <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path={userPath} element={<Modal><User /></Modal>} />
+              </Route>
+            </Routes>
+          </Suspense>
         </Grid>
       </IntlProvider>
     </ThemeProvider>

@@ -9,6 +9,7 @@ import { fetchItems } from '../store/actions';
 import { CreateItem } from './createItem/CreateItem';
 import { DeleteItem } from './deleteItem/DeleteItem';
 import { ItemTable } from './ItemTable';
+import Preloader from '../../../shared/components/Preloader';
 
 export const Items = () => {
     const matches = useMediaQuery('(min-width:700px)');
@@ -36,14 +37,7 @@ export const Items = () => {
             </Grid>
             <CreateItem modal={modal} setModal={setModal} />
             <DeleteItem modalDelete={modalDelete} setModalDelete={setModalDelete} />
-            {isLoading ? <Grid
-                container
-                padding={20}
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-            ><CircularProgress /></Grid> :
+            {isLoading ? <Preloader /> :
                 <Grid
                     item
                     container

@@ -1,6 +1,7 @@
 import { Grid, Typography, CircularProgress } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { FormattedMessage } from "react-intl";
+import Preloader from '../../../shared/components/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchCollections } from '../store/actions'
 import { CollectionCard } from './CollectionCard';
@@ -32,14 +33,7 @@ export const Collections = () => {
                 <CreateButton setModal={setModal} modal={modal} />
             </Grid>
             <CreateCollection modal={modal} setModal={setModal} />
-            {isLoading ? <Grid
-                container
-                padding={20}
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-            ><CircularProgress /></Grid>
+            {isLoading ? <Preloader />
                 : <Grid item container direction='column' sx={{ mt: 2 }}>
                     {collections.map(c => (
                         <CollectionCard key={c.id} collection={c} />
