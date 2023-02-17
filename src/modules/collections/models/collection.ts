@@ -3,6 +3,7 @@ export interface CollectionType {
   title: string;
   description: string;
   tags: string[];
+  image?: string;
   theme: string;
   createdAt: string;
   updatedAt: string;

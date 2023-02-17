@@ -44,6 +44,28 @@ export const fetchCreate =
     }
   };
 
+  interface ImageTypes {
+    id: number;
+    image: string;
+  }
+
+  export const fetchSaveImage =
+  (options: ImageTypes) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(collectionsSlice.actions.updateFetching());
+      const response = await API.put(`collection/image`, options);
+      dispatch(
+        collectionsSlice.actions.updateFetchingSuccess(response.data)
+      );
+    } catch (error: any) {
+      dispatch(
+        collectionsSlice.actions.updateFetchingError(
+          error.response.data.message
+        )
+      );
+    }
+  };
+
 export const fetchDelete =
   (id: number, userId: number) => async (dispatch: AppDispatch) => {
     try {

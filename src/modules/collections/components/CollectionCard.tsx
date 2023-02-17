@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Card, CardMedia, CardContent, Typography, Button, CardActions, IconButton, Grid } from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { Card, CardMedia, CardContent, Typography, Button, CardActions, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { FormattedMessage } from "react-intl"
 import { ref, getDownloadURL } from "firebase/storage";
@@ -37,16 +36,16 @@ export const CollectionCard = ({ collection }: CardType) => {
         setModal(true)
     }
 
-    const imagesListRef = ref(storage, `collections/${collection.title}${collection.id}`);
-
+    
     useEffect(() => {
+        const imagesListRef = ref(storage, String(collection?.image));
         getDownloadURL(imagesListRef).then((url) => {
             if (!url) return
             setImage(url)
         }).catch((e) => {
             console.log(e)
         })
-    }, [imagesListRef])
+    }, [collection])
 
     return (
         <Card sx={{ width: 240 }}>
@@ -76,17 +75,7 @@ export const CollectionCard = ({ collection }: CardType) => {
                         <FormattedMessage id="app.item-card.body.button" />
                     </Button>
                 </CardActions>
-                {/* <IconButton
-                    aria-label="more"
-                    id="long-button"
-                    // aria-controls={open ? 'long-menu' : undefined}
-                    // aria-expanded={open ? 'true' : undefined}
-                    aria-haspopup="true"
-                    onClick={handleDelete}
-                >
-                    <MoreVertIcon /> */}
                     <SettingsBar handleDelete={handleDelete} handleLoad={handleLoad} />
-                {/* </IconButton> */}
             </Grid>
         </Card>
     )

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Modal, Box } from '@mui/material'
 import { FormattedMessage } from "react-intl"
-import { ref, uploadBytes } from 'firebase/storage'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { v4 } from 'uuid'
 import { storage } from '../../../shared/configs/firebase'
+import { useAppDispatch } from '../../../shared/hooks/redux'
+import { fetchSaveImage } from '../store/actions'
 
 interface FileTypes {
     title: string
@@ -13,6 +15,7 @@ interface FileTypes {
 }
 
 export const FileLoader = ({ title, id, modal, setModal }: FileTypes) => {
+    const dispatch = useAppDispatch()
     const [drag, setDrag] = useState(false)
 
     const style = [
@@ -47,7 +50,11 @@ export const FileLoader = ({ title, id, modal, setModal }: FileTypes) => {
         let file = e.dataTransfer.files
         if (file === null) return
         const imageRef = ref(storage, `collections/${title + id}`)
-        uploadBytes(imageRef, file[0])
+        uploadBytes(imageRef, file[0]).then((data) => {
+            getDownloadURL(data.ref).then((url) => {
+                dispatch(fetchSaveImage({id: id, image: url}))
+              });
+        })
         setDrag(false)
         setModal(false)
     }
