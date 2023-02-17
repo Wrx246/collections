@@ -6,6 +6,7 @@
   "app.header.locale": "Язык",
   "app.user-page.body.collections": "Коллекции",
   "app.user-page.body.items": "Элементы",
+  "app.search-page.header.items": "Найденные элементы",
   "app.user-page.body.count": "элементов",
   "app.user-page.body.sort": "Сортировать по",
   "app.user-page.body.sort-date": "Дате",

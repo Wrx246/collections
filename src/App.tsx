@@ -4,7 +4,7 @@ import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IntlProvider } from 'react-intl';
 import Modal from './shared/components/Modal';
-import { Login, Main, Registration, User, Item, Collection } from './shared/components/Lazy';
+import { Login, Main, Registration, User, Item, Collection } from './shared/helpers/Lazy';
 import ProtectedRoutes from './pages/ProtectedRoutes';
 import {
   collectionPath,
@@ -12,6 +12,7 @@ import {
   itemPath,
   loginPath,
   registrationPath,
+  searchPath,
   userPath
 } from './shared/constants/Paths';
 import { useAppDispatch, useAppSelector } from './shared/hooks/redux';
@@ -20,6 +21,7 @@ import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
 import Preloader from './shared/components/Preloader';
+import { SearchItems } from './modules/items';
 
 
 function App() {
@@ -69,6 +71,7 @@ function App() {
               <Route path={homePath} element={<Modal><Main /></Modal>} />
               <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
               <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
+              <Route path={`/${searchPath}`} element={<Modal><SearchItems /></Modal>} />
               <Route element={<ProtectedRoutes />}>
                 <Route path={userPath} element={<Modal><User /></Modal>} />
               </Route>

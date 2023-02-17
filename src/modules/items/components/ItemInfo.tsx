@@ -30,7 +30,7 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
                 </Typography>
             </Grid>
             <Grid item container direction='column' gap={3}>
-                <Typography component='p' sx={{fontSize: 20}}>
+                <Typography component='span' sx={{fontSize: 20}}>
                     <FormattedMessage id="app.item-card.body.tags" />: <br/>
                     {item?.tags.map((t) => <Chip key={t} label={t} variant="outlined" sx={{marginRight: 3, fontSize: 17}} />)}
                 </Typography>

@@ -7,6 +7,7 @@ import { collectionsReducer } from "./../modules/collections/";
 import { localeReducer } from "./../modules/localization/";
 import { itemsReducer } from "./../modules/items/";
 import { commentsReducer } from './../modules/comments/';
+import { searchReducer } from './../modules/header/';
 
 const rootReducer = combineReducers({
   themeReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   localeReducer,
   itemsReducer,
   commentsReducer,
+  searchReducer
 });
 
 export const setupStore = () => {
