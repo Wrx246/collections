@@ -30,17 +30,33 @@ export const collectionsSlice = createSlice({
       state.error = action.payload;
     },
     createFetching(state) {
-        state.isLoading = true;
+      state.isLoading = true;
     },
     createFetchingSuccess(state, action: PayloadAction<CollectionType>) {
-        state.isLoading = false;
-        state.error = "";
-        state.collections = [...state.collections, action.payload];
+      state.isLoading = false;
+      state.error = "";
+      state.collections = [...state.collections, action.payload];
     },
     createFetchingError(state, action: PayloadAction<string>) {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    updateFetching(state) {
+      state.isLoading = true;
+    },
+    updateFetchingSuccess(state, action: PayloadAction<CollectionType>) {
+      state.isLoading = false;
+      state.error = "";
+      state.collections = [
+        ...state.collections.map((c) =>
+          c.id === action.payload.id ? (c = action.payload) : c
+        ),
+      ];
+    },
+    updateFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
