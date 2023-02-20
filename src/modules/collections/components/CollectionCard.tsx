@@ -17,6 +17,7 @@ type CardType = {
 
 export const CollectionCard = ({ collection }: CardType) => {
     const [modal, setModal] = useState<boolean>(false)
+    const [settings, setSettings] = useState<boolean>(false)
     const [image, setImage] = useState<string>('')
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -24,6 +25,7 @@ export const CollectionCard = ({ collection }: CardType) => {
     const handleOpen = () => {
         navigate(`/${collection.id}`)
         localStorage.setItem('collection', JSON.stringify(collection))
+        localStorage.setItem('collection-settings', JSON.stringify(collection.userId))
     }
 
     const handleDelete = (e: React.MouseEvent) => {
@@ -36,7 +38,11 @@ export const CollectionCard = ({ collection }: CardType) => {
         setModal(true)
     }
 
-    
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem('user-data') || 'false')
+        collection.userId === Number(user.id) ? setSettings(true) : setSettings(false)
+    }, [collection])
+
     useEffect(() => {
         const imagesListRef = ref(storage, String(collection?.image));
         getDownloadURL(imagesListRef).then((url) => {
@@ -55,7 +61,7 @@ export const CollectionCard = ({ collection }: CardType) => {
                 title={collection.title}
                 id={collection.id} />
             <CardMedia
-                sx={{height: 140}}
+                sx={{ height: 140 }}
                 onClick={handleLoad}
                 image={image ? image : noImage}
                 component='img'
@@ -75,7 +81,10 @@ export const CollectionCard = ({ collection }: CardType) => {
                         <FormattedMessage id="app.item-card.body.button" />
                     </Button>
                 </CardActions>
+                {settings ?
                     <SettingsBar handleDelete={handleDelete} handleLoad={handleLoad} />
+                    : <></>
+                }
             </Grid>
         </Card>
     )
