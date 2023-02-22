@@ -16,6 +16,7 @@
   "app.user-page.body.delete": "Удалить",
   "app.user-page.body.image": "Изображение",
   "app.main-page.header.items": "Последние элементы",
+  "app.main-page.header.tags": "Популярные теги",
   "app.main-page.header.collections": "Популярные коллекции",
   "app.main-page.collections-not-found": "Коллекции не найдены",
   "app.item-card.body.created": "Создано",
