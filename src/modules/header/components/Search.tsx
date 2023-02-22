@@ -6,6 +6,7 @@ import { useDebounce } from '../helpers/useDebounce';
 import { useAppDispatch } from '../../../shared/hooks/redux';
 import { fetchSearch } from '../store/actions';
 import { searchPath } from '../../../shared/constants/Paths';
+import { tagsSlice } from '../../tags';
 
 export const Search = () => {
     const [search, setSearch] = useState<string>('')
@@ -22,7 +23,7 @@ export const Search = () => {
         setSearch(e.target.value)
         debouncedSearch(e.target.value)
         navigate(searchPath)
-
+        dispatch(tagsSlice.actions.searchFetchingSuccess([]))
     }
 
     return (

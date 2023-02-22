@@ -2,11 +2,17 @@ import { Box, Divider, Typography, useMediaQuery } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import { Popular } from '../modules/collections';
 import { LatestItems } from '../modules/items'
+import { Tags } from '../modules/tags';
 
 const Main = () => {
   const matches = useMediaQuery('(min-width:700px)');
   return (
     <Box sx={{ width: '80%', pt: 2 }}>
+      <Typography variant={matches ? 'h4' : 'h6'}>
+        <FormattedMessage id="app.main-page.header.tags" />
+      </Typography>
+      <Tags />
+      <Divider light />
       <Typography variant={matches ? 'h4' : 'h6'}>
         <FormattedMessage id="app.main-page.header.items" />
       </Typography>

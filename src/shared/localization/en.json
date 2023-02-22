@@ -16,6 +16,7 @@
   "app.user-page.body.delete": "Delete item",
   "app.user-page.body.image": "Change image",
   "app.main-page.header.items": "Latest items",
+  "app.main-page.header.tags": "Popular tags",
   "app.main-page.header.collections": "Popular collections",
   "app.main-page.collections-not-found": "Not found collections",
   "app.item-card.body.created": "Created",
