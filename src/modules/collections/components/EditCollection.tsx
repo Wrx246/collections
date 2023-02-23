@@ -14,15 +14,16 @@ import {
 } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { FormattedMessage } from "react-intl"
-import { useAppDispatch } from '../../../shared/hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { controls, style, themes } from '../constants/constants'
 import { Tags } from './Tags'
-import { fetchCreate } from '../store/actions'
+import { fetchEdit } from '../store/actions'
 import { OptionalControl } from './OptionalControl'
 
 type ModalType = {
-    setModal: React.Dispatch<React.SetStateAction<boolean>>
-    modal: boolean
+    setEdit: React.Dispatch<React.SetStateAction<boolean>>
+    edit: boolean
+    collectionId: number
 }
 
 type FormData = {
@@ -31,13 +32,16 @@ type FormData = {
     theme: string
 };
 
-export const CreateCollection = ({ modal, setModal }: ModalType) => {
+export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
+    const collection = useAppSelector(state => state.collectionsReducer.collections)
+        .filter(c => c.id === collectionId)[0]
     const matches = useMediaQuery('(min-width:420px)');
-    const [tags, setTags] = useState<string[]>([])
-    const [show, setShow] = useState<boolean>(true)
-    const [checkControl, setCheckControl] = React.useState<string[]>([]);
+    const [tags, setTags] = useState<string[]>(collection.tags)
+    const [show, setShow] = useState<boolean>(false)
+    const optional = Object.keys(collection).filter(c => controls.includes(c))
+    const [checkControl, setCheckControl] = React.useState<string[]>(optional);
 
-    const handleClose = () => setModal(false);
+    const handleClose = () => setEdit(false);
     const dispatch = useAppDispatch()
     const {
         register,
@@ -46,13 +50,15 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         reset,
     } = useForm<FormData>({ mode: "onBlur" });
 
+
+
     const onSubmit = handleSubmit((data) => {
         let difference = controls.filter(c => !checkControl.includes(c));
         const disabledFields = difference.reduce((acc: any, curr: any) => (acc[curr] = false, acc), {});
         const enabledFields = checkControl.reduce((acc: any, curr: any) => (acc[curr] = true, acc), {});
         let user = JSON.parse(localStorage.getItem("user-data") || '')
-        dispatch(fetchCreate({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(user.id) }));
-        setModal(false)
+        dispatch(fetchEdit({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(user.id) }));
+        setEdit(false)
         setTags([])
         reset();
     });
@@ -73,7 +79,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
 
     return (
         <Modal
-            open={modal}
+            open={edit}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -88,7 +94,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                 component="form"
                 onSubmit={onSubmit}>
                 <Typography sx={{ fontWeight: 600, fontSize: 23 }} component='h6'>
-                    <FormattedMessage id="app.create.header" />
+                    <FormattedMessage id="app.edit.header" />
                 </Typography>
                 <TextField
                     fullWidth
@@ -98,6 +104,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                     variant="outlined"
                     type='text'
                     error={!!errors?.title}
+                    defaultValue={collection.title}
                     {...register("title", { required: "Required field!" })}
                     helperText={errors?.title?.message} />
                 <TextField
@@ -108,6 +115,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                     variant="outlined"
                     type='text'
                     error={!!errors?.description}
+                    defaultValue={collection.description}
                     {...register("description", { required: "Required field!" })}
                     helperText={errors?.description?.message} />
                 <FormControl fullWidth>
@@ -117,7 +125,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                     <Select
                         labelId="select-label"
                         id="select"
-                        defaultValue="Alcohol"
+                        defaultValue={collection.theme}
                         label="Theme"
                         {...register("theme", { required: "Required field!" })}
                         error={!!errors?.theme}>
@@ -132,7 +140,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                 </Button>}
                 {!show && <OptionalControl checkControl={checkControl} controls={controls} handleChange={handleChange} />}
                 <Button color='primary' variant='contained' type='submit'>
-                    <FormattedMessage id="app.create.button" />
+                    <FormattedMessage id="app.edit.button" />
                 </Button>
             </Grid>
         </Modal>
