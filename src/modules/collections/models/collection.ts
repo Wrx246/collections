@@ -8,4 +8,19 @@ export interface CollectionType {
   createdAt: string;
   updatedAt: string;
   userId: number;
+  author?: boolean;
+  comment?: boolean;
+  additionalInfo?: boolean;
+  publication?: boolean;
+  foundation?: boolean;
+  price?: boolean;
+  reward?: boolean;
+  score?: boolean;
+  favorite?: boolean;
+  country?: boolean;
+  language?: boolean;
+  shortName?: boolean;
+  status?: boolean;
+  terminated?: boolean;
+  original?: boolean;
 }

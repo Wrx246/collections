@@ -78,7 +78,9 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                     fieldId='outlined-title-item'
                     label="app.create.title"
                     setValue={setTitle} />
-                {show && <Button fullWidth onClick={handleShow} variant="text">More options</Button>}
+                {show && <Button fullWidth onClick={handleShow} variant="text">
+                    <FormattedMessage id="app.create.option-button" />
+                </Button>}
                 {!show && <>
                     <CreateField
                         type='date'

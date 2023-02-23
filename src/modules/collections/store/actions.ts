@@ -44,6 +44,23 @@ export const fetchCreate =
     }
   };
 
+export const fetchEdit =
+  (options: CreateType) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(collectionsSlice.actions.updateFetching());
+      const response = await API.put(`collection/edit`, options);
+      dispatch(
+        collectionsSlice.actions.updateFetchingSuccess(response.data.collection)
+      );
+    } catch (error: any) {
+      dispatch(
+        collectionsSlice.actions.updateFetchingError(
+          error.response.data.message
+        )
+      );
+    }
+  };
+
   interface ImageTypes {
     id: number;
     image: string;

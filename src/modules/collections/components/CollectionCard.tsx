@@ -10,6 +10,7 @@ import { fetchDelete } from '../store/actions';
 import { FileLoader } from './FileLoader'
 import noImage from '../assets/pngtree.jpg'
 import SettingsBar from './SettingsBar'
+import { EditCollection } from './EditCollection';
 
 type CardType = {
     collection: CollectionType
@@ -18,6 +19,7 @@ type CardType = {
 export const CollectionCard = ({ collection }: CardType) => {
     const [modal, setModal] = useState<boolean>(false)
     const [settings, setSettings] = useState<boolean>(false)
+    const [edit, setEdit] = useState<boolean>(false)
     const [image, setImage] = useState<string>('')
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -36,6 +38,10 @@ export const CollectionCard = ({ collection }: CardType) => {
 
     const handleLoad = () => {
         setModal(true)
+    }
+
+    const handleEdit = () => {
+        setEdit(true)
     }
 
     useEffect(() => {
@@ -60,6 +66,7 @@ export const CollectionCard = ({ collection }: CardType) => {
                 modal={modal}
                 title={collection.title}
                 id={collection.id} />
+            <EditCollection edit={edit} setEdit={setEdit} collectionId={collection.id} />
             <CardMedia
                 sx={{ height: 140 }}
                 onClick={handleLoad}
@@ -82,7 +89,7 @@ export const CollectionCard = ({ collection }: CardType) => {
                     </Button>
                 </CardActions>
                 {settings ?
-                    <SettingsBar handleDelete={handleDelete} handleLoad={handleLoad} />
+                    <SettingsBar handleDelete={handleDelete} handleEdit={handleEdit} handleLoad={handleLoad} />
                     : <></>
                 }
             </Grid>
