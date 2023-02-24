@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import { IconButton, Button, Menu, MenuItem } from '@mui/material';
+import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { FormattedMessage } from "react-intl";
 
 type PopupTypes = {
-    handleCreate: (e: React.MouseEvent<HTMLButtonElement>) => void
-    handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void
+    handleCreate: (e: React.MouseEvent) => void
+    handleDelete: (e: React.MouseEvent) => void
+    handleEdit: (e: React.MouseEvent) => void
 }
 
 
-export const Popup = ({ handleCreate, handleDelete }: PopupTypes) => {
+export const Popup = ({ handleCreate, handleDelete, handleEdit }: PopupTypes) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,15 +47,14 @@ export const Popup = ({ handleCreate, handleDelete }: PopupTypes) => {
                     },
                 }}
             >
-                <MenuItem>
-                    <Button color='primary' variant='contained' onClick={handleCreate}>
-                        <FormattedMessage id="app.user-page.body.add" />
-                    </Button>
+                <MenuItem onClick={handleCreate}>
+                    <FormattedMessage id="app.user-page.body.add" />
                 </MenuItem>
-                <MenuItem>
-                    <Button color='primary' variant='contained' onClick={handleDelete}>
-                        <FormattedMessage id="app.user-page.body.delete" />
-                    </Button>
+                <MenuItem onClick={handleDelete}>
+                    <FormattedMessage id="app.user-page.body.delete" />
+                </MenuItem>
+                <MenuItem onClick={handleEdit}>
+                    <FormattedMessage id="app.user-page.body.edit-item" />
                 </MenuItem>
             </Menu>
         </>

@@ -10,20 +10,27 @@ type SettingsType = {
     modal: boolean
     setModalDelete: React.Dispatch<React.SetStateAction<boolean>>
     modalDelete: boolean
+    setSelectEdit: React.Dispatch<React.SetStateAction<boolean>>
+    selectEdit: boolean
 }
 
-export const SettingsBar = ({ modal, setModal, modalDelete, setModalDelete }: SettingsType) => {
+export const SettingsBar = ({ modal, setModal, modalDelete, setModalDelete, setSelectEdit, selectEdit }: SettingsType) => {
     const matches = useMediaQuery('(max-width:700px)');
 
 
-    const handleCreate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleCreate = (e: React.MouseEvent) => {
         e.preventDefault()
         setModal(!modal)
     }
 
-    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDelete = (e: React.MouseEvent) => {
         e.preventDefault()
         setModalDelete(!modalDelete)
+    }
+
+    const handleEdit = (e: React.MouseEvent) => {
+        e.preventDefault()
+        setSelectEdit(!selectEdit)
     }
 
     return (
@@ -33,7 +40,7 @@ export const SettingsBar = ({ modal, setModal, modalDelete, setModalDelete }: Se
                     <BackButton />
                 </Grid>
                 <Grid item>
-                    <Popup handleCreate={handleCreate} handleDelete={handleDelete} />
+                    <Popup handleCreate={handleCreate} handleEdit={handleEdit} handleDelete={handleDelete} />
                 </Grid>
             </>
                 :
@@ -42,8 +49,11 @@ export const SettingsBar = ({ modal, setModal, modalDelete, setModalDelete }: Se
                         <BackButton />
                     </Grid>
                     <Grid item>
-                        <Button sx={{ marginX: 2 }} color='primary' variant='contained' onClick={handleCreate}>
+                        <Button color='primary' variant='contained' onClick={handleCreate}>
                             <FormattedMessage id="app.user-page.body.add" />
+                        </Button>
+                        <Button sx={{ marginX: 2 }} color='primary' variant='contained' onClick={handleEdit}>
+                            <FormattedMessage id="app.user-page.body.edit-item" />
                         </Button>
                         <Button color='primary' variant='contained' onClick={handleDelete}>
                             <FormattedMessage id="app.user-page.body.delete" />

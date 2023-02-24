@@ -1,4 +1,3 @@
-import React from 'react'
 import { DataGrid, GridColDef, GridEventListener } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
@@ -14,6 +13,9 @@ const columns: GridColDef[] = [
             return moment(params.value).format('MMMM Do YYYY')
         },
     },
+    { field: 'score', headerName: 'score', type: 'number', width: 90 },
+    { field: 'country', headerName: 'country', type: 'string', width: 90 },
+    { field: 'reward', headerName: 'reward', type: 'number', width: 90 },
 ];
 
 type CardType = {

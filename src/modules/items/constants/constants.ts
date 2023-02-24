@@ -1,0 +1,17 @@
+export const controls = [
+    "author",
+    "comment",
+    "info",
+    "publication",
+    "foundation",
+    "price",
+    "reward",
+    "score",
+    "favorite",
+    "country",
+    "language",
+    "shortName",
+    "status",
+    "terminated",
+    "original",
+]

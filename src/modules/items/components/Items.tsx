@@ -11,6 +11,8 @@ import { DeleteItem } from './deleteItem/DeleteItem';
 import { ItemTable } from './ItemTable';
 import Preloader from '../../../shared/components/Preloader';
 import BackButton from '../../../shared/components/BackButton';
+import { EditItem } from './editItem/EditItem';
+import { EditSelect } from './editItem/EditSelect';
 
 export const Items = () => {
     const matches = useMediaQuery('(min-width:700px)');
@@ -19,6 +21,9 @@ export const Items = () => {
     const [modal, setModal] = useState<boolean>(false)
     const [settings, setSettings] = useState<boolean>(false)
     const [modalDelete, setModalDelete] = useState<boolean>(false)
+    const [modalEdit, setModalEdit] = useState<boolean>(false)
+    const [editId, setEditId] = useState<number>(0)
+    const [selectEdit, setSelectEdit] = useState<boolean>(false)
     const { items, isLoading } = useAppSelector(state => state.itemsReducer)
 
     useEffect(() => {
@@ -31,6 +36,13 @@ export const Items = () => {
         user.id === id ? setSettings(true) : setSettings(false)
     }, [])
 
+    const handleSettings = (e: React.MouseEvent, id: number) => {
+        e.preventDefault()
+        setEditId(id)
+        setModalEdit(true)
+        setSelectEdit(false)
+    }
+
     return (
         <Grid container sx={{ pt: 2 }} direction='column'>
             <Grid item container direction='column'>
@@ -39,6 +51,8 @@ export const Items = () => {
                 </Typography>
                 {settings ?
                     <SettingsBar
+                        selectEdit={selectEdit}
+                        setSelectEdit={setSelectEdit}
                         modal={modal}
                         setModal={setModal}
                         modalDelete={modalDelete}
@@ -48,6 +62,14 @@ export const Items = () => {
             </Grid>
             <CreateItem modal={modal} setModal={setModal} />
             <DeleteItem modalDelete={modalDelete} setModalDelete={setModalDelete} />
+            <EditItem
+                editId={editId}
+                modalEdit={modalEdit}
+                setModalEdit={setModalEdit} />
+            <EditSelect
+                handleSettings={handleSettings}
+                selectEdit={selectEdit}
+                setSelectEdit={setSelectEdit} />
             {isLoading ? <Preloader /> :
                 <Grid
                     item
