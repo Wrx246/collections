@@ -1,25 +1,27 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 import { FormattedMessage } from "react-intl"
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 
 interface FieldTypes {
-    value: string,
-    setValue: React.Dispatch<React.SetStateAction<string>>,
-    label?: string,
     type: string,
-    fieldId: string
+    label: string,
+    register: UseFormRegister<FormData>,
+    errors: FieldErrors<FormData>
 }
 
-export const CreateField = ({value, setValue, label, type, fieldId}: FieldTypes) => {
+export const CreateField = ({ label, type, register, errors }: FieldTypes) => {
     return (
-        <TextField
-            fullWidth
-            id={fieldId}
-            label={label && <FormattedMessage id={label} />}
-            color='primary'
-            variant="outlined"
-            type={type}
-            value={value}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)} />
+        <></>
+        // <TextField
+        //     fullWidth
+        //     id={`outlined-${label}-item`}
+        //     label={<FormattedMessage id={`app.create.${label}`} />}
+        //     color='primary'
+        //     variant="outlined"
+        //     type={type}
+        //     error={!!errors?.label}
+        //     {...register(label, { required: "Required field!" })}
+        //     helperText={errors?.label?.message} />
     )
 }

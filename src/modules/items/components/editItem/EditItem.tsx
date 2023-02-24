@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button, Grid, Modal, Typography, TextField } from '@mui/material'
-import { useParams } from 'react-router-dom'
 import { FormattedMessage } from "react-intl"
 import { useForm } from 'react-hook-form'
+import moment from 'moment'
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/redux'
-import { fetchCreateItem } from '../../store/actions'
-import { CreateField } from './CreateField'
-import { fetchCollections } from '../../../collections/store/actions'
+import { fetchEditItem } from '../../store/actions'
 
 type ModalType = {
-    setModal: React.Dispatch<React.SetStateAction<boolean>>
-    modal: boolean
+    setModalEdit: React.Dispatch<React.SetStateAction<boolean>>
+    modalEdit: boolean
+    editId: number
 }
 
 const style = {
@@ -46,14 +45,11 @@ type FormData = {
     original?: boolean;
 };
 
-export const CreateItem = ({ modal, setModal }: ModalType) => {
-    const { collectionId } = useParams()
-    const handleClose = () => setModal(false);
+export const EditItem = ({ modalEdit, setModalEdit, editId }: ModalType) => {
+    const handleClose = () => setModalEdit(false);
     const dispatch = useAppDispatch()
-    const collections = useAppSelector(state => state.collectionsReducer.collections)
-        .filter(c => c.id === Number(collectionId))[0]
-    const storageColl = JSON.parse(localStorage.getItem('collection') || String(collections))
-    const [collection] = useState<string[]>(storageColl.tags)
+    const items = useAppSelector(state => state.itemsReducer.items)
+        .filter(i => i.id === editId)[0]
 
     const {
         register,
@@ -63,28 +59,20 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
     } = useForm<FormData>({ mode: "onBlur" });
 
     const onSubmit = handleSubmit((data) => {
-        console.log({ ...data, tags: collection, collectionId: Number(collectionId) })
-        dispatch(fetchCreateItem({ ...data, tags: collection, collectionId: Number(collectionId) }));
-        setModal(false)
+        dispatch(fetchEditItem({ ...data, id: editId }));
+        setModalEdit(false)
         reset();
     });
-    const [show, setShow] = useState<boolean>(!modal)
+    const [show, setShow] = useState<boolean>(!modalEdit)
 
     const handleShow = (e: React.MouseEvent) => {
         e.preventDefault()
         setShow(false)
     }
 
-    useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        if (user !== 'false') {
-            dispatch(fetchCollections(user.id))
-        }
-    },[])
-
     return (
         <Modal
-            open={modal}
+            open={modalEdit}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -96,7 +84,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                 justifyContent='center'
                 gap={2}>
                 <Typography sx={{ fontWeight: 600, fontSize: 23 }} component='h6'>
-                    <FormattedMessage id="app.create-item.header" />
+                    <FormattedMessage id="app.user-page.body.edit-item" />
                 </Typography>
                 <TextField
                     fullWidth
@@ -106,13 +94,14 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                     variant="outlined"
                     type='text'
                     error={!!errors?.title}
+                    defaultValue={items?.title}
                     {...register("title", { required: "Required field!" })}
                     helperText={errors?.title?.message} />
                 {show && <Button fullWidth onClick={handleShow} variant="text">
                     <FormattedMessage id="app.create.option-button" />
                 </Button>}
                 {!show && <>
-                    {collections.author && <TextField
+                    {items.author && <TextField
                         fullWidth
                         id='outlined-author-item'
                         label={<FormattedMessage id="app.checkbox.author" />}
@@ -120,9 +109,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.author}
+                        defaultValue={items?.author}
                         {...register("author", { required: "Required field!" })}
                         helperText={errors?.author?.message} />}
-                    {collections.comment && <TextField
+                    {items.comment && <TextField
                         fullWidth
                         id='outlined-comment-item'
                         label={<FormattedMessage id="app.checkbox.comment" />}
@@ -130,9 +120,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.comment}
+                        defaultValue={items?.comment}
                         {...register("comment", { required: "Required field!" })}
                         helperText={errors?.comment?.message} />}
-                    {collections.additionalInfo && <TextField
+                    {items.additionalInfo && <TextField
                         fullWidth
                         id='outlined-additionalInfo-item'
                         label={<FormattedMessage id="app.checkbox.additionalInfo" />}
@@ -140,9 +131,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.additionalInfo}
+                        defaultValue={items?.additionalInfo}
                         {...register("additionalInfo", { required: "Required field!" })}
                         helperText={errors?.additionalInfo?.message} />}
-                    {collections.publication && <TextField
+                    {items.publication && <TextField
                         fullWidth
                         id='outlined-publication-item'
                         label={<FormattedMessage id="app.checkbox.publication" />}
@@ -150,9 +142,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='date'
                         error={!!errors?.publication}
+                        defaultValue={moment(items?.publication).format('yyyy-MM-dd')}
                         {...register("publication", { required: "Required field!" })}
                         helperText={errors?.publication?.message} />}
-                    {collections.foundation && <TextField
+                    {items.foundation && <TextField
                         fullWidth
                         id='outlined-foundation-item'
                         label={<FormattedMessage id="app.checkbox.foundation" />}
@@ -160,9 +153,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='date'
                         error={!!errors?.foundation}
+                        defaultValue={items?.foundation}
                         {...register("foundation", { required: "Required field!" })}
                         helperText={errors?.foundation?.message} />}
-                    {collections.terminated && <TextField
+                    {items.terminated && <TextField
                         fullWidth
                         id='outlined-terminated-item'
                         label={<FormattedMessage id="app.checkbox.terminated" />}
@@ -170,9 +164,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='date'
                         error={!!errors?.terminated}
+                        defaultValue={items?.terminated}
                         {...register("terminated", { required: "Required field!" })}
                         helperText={errors?.terminated?.message} />}
-                    {collections.price && <TextField
+                    {items.price && <TextField
                         fullWidth
                         id='outlined-price-item'
                         label={<FormattedMessage id="app.checkbox.price" />}
@@ -180,9 +175,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='number'
                         error={!!errors?.price}
+                        defaultValue={items?.price}
                         {...register("price", { required: "Required field!" })}
                         helperText={errors?.price?.message} />}
-                    {collections.reward && <TextField
+                    {items.reward && <TextField
                         fullWidth
                         id='outlined-reward-item'
                         label={<FormattedMessage id="app.checkbox.reward" />}
@@ -190,9 +186,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='number'
                         error={!!errors?.reward}
+                        defaultValue={items?.reward}
                         {...register("reward", { required: "Required field!" })}
                         helperText={errors?.reward?.message} />}
-                    {collections.score && <TextField
+                    {items.score && <TextField
                         fullWidth
                         id='outlined-score-item'
                         label={<FormattedMessage id="app.checkbox.score" />}
@@ -200,9 +197,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='number'
                         error={!!errors?.score}
+                        defaultValue={items?.score}
                         {...register("score", { required: "Required field!" })}
                         helperText={errors?.score?.message} />}
-                    {collections.country && <TextField
+                    {items.country && <TextField
                         fullWidth
                         id='outlined-country-item'
                         label={<FormattedMessage id="app.checkbox.country" />}
@@ -210,9 +208,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.country}
+                        defaultValue={items?.country}
                         {...register("country", { required: "Required field!" })}
                         helperText={errors?.country?.message} />}
-                    {collections.language && <TextField
+                    {items.language && <TextField
                         fullWidth
                         id='outlined-language-item'
                         label={<FormattedMessage id="app.checkbox.language" />}
@@ -220,9 +219,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.language}
+                        defaultValue={items?.language}
                         {...register("language", { required: "Required field!" })}
                         helperText={errors?.language?.message} />}
-                    {collections.shortName && <TextField
+                    {items.shortName && <TextField
                         fullWidth
                         id='outlined-shortName-item'
                         label={<FormattedMessage id="app.checkbox.shortName" />}
@@ -230,9 +230,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='text'
                         error={!!errors?.shortName}
+                        defaultValue={items?.shortName}
                         {...register("shortName", { required: "Required field!" })}
                         helperText={errors?.shortName?.message} />}
-                    {collections.status && <TextField
+                    {items.status && <TextField
                         fullWidth
                         id='outlined-status-item'
                         label={<FormattedMessage id="app.checkbox.status" />}
@@ -240,9 +241,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='checkbox'
                         error={!!errors?.status}
+                        defaultValue={items?.status}
                         {...register("status", { required: "Required field!" })}
                         helperText={errors?.status?.message} />}
-                    {collections.favorite && <TextField
+                    {items.favorite && <TextField
                         fullWidth
                         id='outlined-favorite-item'
                         label={<FormattedMessage id="app.checkbox.favorite" />}
@@ -250,9 +252,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='checkbox'
                         error={!!errors?.favorite}
+                        defaultValue={items?.favorite}
                         {...register("favorite", { required: "Required field!" })}
                         helperText={errors?.favorite?.message} />}
-                    {collections.original && <TextField
+                    {items.original && <TextField
                         fullWidth
                         id='outlined-original-item'
                         label={<FormattedMessage id="app.checkbox.original" />}
@@ -260,12 +263,13 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         variant="outlined"
                         type='checkbox'
                         error={!!errors?.original}
+                        defaultValue={items?.original}
                         {...register("original", { required: "Required field!" })}
                         helperText={errors?.original?.message} />}
                 </>
                 }
                 <Button color='primary' variant='contained' onClick={onSubmit}>
-                    <FormattedMessage id="app.create.button" />
+                    <FormattedMessage id="app.edit.button" />
                 </Button>
             </Grid>
         </Modal>
