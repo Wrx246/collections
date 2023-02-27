@@ -21,7 +21,8 @@ export const LatestItems = () => {
                     {items?.slice(0, 5).map(i => (
                         <ItemCard key={i.id} item={i} />
                     ))}
-                </Grid>}
+                </Grid>
+            }
         </>
     )
 }

@@ -123,20 +123,18 @@ export const fetchDeleteItem =
 interface LikeTypes {
   userId: number;
   id: number;
-  setIsLike: (value: React.SetStateAction<boolean>) => void;
 }
 
 export const fetchAddLike =
   (options: LikeTypes) => async (dispatch: AppDispatch) => {
     try {
-      const { id, userId, setIsLike } = options;
+      const { id, userId } = options;
       dispatch(itemsSlice.actions.updateFetching());
       const response = await API.put(`item/addLike`, {
         id: id,
         userId: userId,
       });
       dispatch(itemsSlice.actions.updateFetchingSuccess(response.data.data));
-      setIsLike(true);
     } catch (error: any) {
       dispatch(
         itemsSlice.actions.updateFetchingError(error.response.data.message)
@@ -147,14 +145,13 @@ export const fetchAddLike =
 export const fetchRemoveLike =
   (options: LikeTypes) => async (dispatch: AppDispatch) => {
     try {
-      const { id, userId, setIsLike } = options;
+      const { id, userId } = options;
       dispatch(itemsSlice.actions.updateFetching());
       const response = await API.put(`item/removeLike`, {
         id: id,
         userId: userId,
       });
       dispatch(itemsSlice.actions.updateFetchingSuccess(response.data.data));
-      setIsLike(false);
     } catch (error: any) {
       dispatch(
         itemsSlice.actions.updateFetchingError(error.response.data.message)

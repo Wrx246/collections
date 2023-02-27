@@ -24,6 +24,21 @@ type CreateType = {
   description: string;
   tags: string[];
   theme: string;
+  author?: boolean;
+  language?: boolean;
+  shortName?: boolean;
+  comment?: boolean;
+  additionalInfo?: boolean;
+  country?: boolean;
+  publication?: boolean;
+  foundation?: boolean;
+  terminated?: boolean;
+  price?: boolean;
+  reward?: boolean;
+  score?: boolean;
+  favorite?: boolean;
+  status?: boolean;
+  original?: boolean;
   userId: number;
 };
 
@@ -61,19 +76,17 @@ export const fetchEdit =
     }
   };
 
-  interface ImageTypes {
-    id: number;
-    image: string;
-  }
+interface ImageTypes {
+  id: number;
+  image: string;
+}
 
-  export const fetchSaveImage =
+export const fetchSaveImage =
   (options: ImageTypes) => async (dispatch: AppDispatch) => {
     try {
       dispatch(collectionsSlice.actions.updateFetching());
       const response = await API.put(`collection/image`, options);
-      dispatch(
-        collectionsSlice.actions.updateFetchingSuccess(response.data)
-      );
+      dispatch(collectionsSlice.actions.updateFetchingSuccess(response.data));
     } catch (error: any) {
       dispatch(
         collectionsSlice.actions.updateFetchingError(
@@ -102,18 +115,20 @@ export const fetchDelete =
     }
   };
 
-  export const fetchPopular = () => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(collectionsSlice.actions.collectionsFetching());
-      const response = await API.get(`collection/popular`);
-      dispatch(
-        collectionsSlice.actions.collectionsFetchingSuccess(response.data.collections)
-      );
-    } catch (error: any) {
-      dispatch(
-        collectionsSlice.actions.collectionsFetchingError(
-          error.response.data.message
-        )
-      );
-    }
+export const fetchPopular = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(collectionsSlice.actions.collectionsFetching());
+    const response = await API.get(`collection/popular`);
+    dispatch(
+      collectionsSlice.actions.collectionsFetchingSuccess(
+        response.data.collections
+      )
+    );
+  } catch (error: any) {
+    dispatch(
+      collectionsSlice.actions.collectionsFetchingError(
+        error.response.data.message
+      )
+    );
   }
+};

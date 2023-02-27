@@ -1,14 +1,18 @@
 import { Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { userPath } from '../../../shared/constants/Paths';
+import { adminPath, userPath } from '../../../shared/constants/Paths';
 
 export const AvatarButton = () => {
     const navigate = useNavigate();
 
-    const { name } = JSON.parse(localStorage.getItem('user-data') || '')
+    const { name, id, role } = JSON.parse(localStorage.getItem('user-data') || '')
 
     const handleAvatar = () => {
-        navigate(userPath)
+        if(role === 'admin') {
+            navigate(adminPath)
+        } else {
+            navigate(`/user/${id}`)
+        }
     }
     return (
         <Avatar sx={{":hover": { cursor: 'pointer'}}} onClick={handleAvatar}>{name}</Avatar>

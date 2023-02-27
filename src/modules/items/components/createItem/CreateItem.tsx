@@ -48,7 +48,7 @@ type FormData = {
 };
 
 export const CreateItem = ({ modal, setModal }: ModalType) => {
-    const { collectionId } = useParams()
+    const { collectionId, userId } = useParams()
     const handleClose = () => setModal(false);
     const dispatch = useAppDispatch()
     const collections = useAppSelector(state => state.collectionsReducer.collections)
@@ -64,7 +64,6 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
     } = useForm<FormData>({ mode: "onBlur" });
 
     const onSubmit = handleSubmit((data) => {
-        console.log({ ...data, tags: collection, collectionId: Number(collectionId) })
         dispatch(fetchCreateItem({ ...data, tags: collection, collectionId: Number(collectionId) }));
         setModal(false)
         reset();
@@ -77,10 +76,10 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
     }
 
     useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        if (user !== 'false') {
-            dispatch(fetchCollections(user.id))
-        }
+        // let user = JSON.parse(localStorage.getItem('user-data') || 'false')
+        // if (user !== 'false') {
+            dispatch(fetchCollections(Number(userId)))
+        // }
     }, [])
 
     return (

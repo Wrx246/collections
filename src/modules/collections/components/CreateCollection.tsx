@@ -19,6 +19,7 @@ import { controls, style, themes } from '../constants/constants'
 import { Tags } from './Tags'
 import { fetchCreate } from '../store/actions'
 import { OptionalControl } from './OptionalControl'
+import { useParams } from 'react-router-dom'
 
 type ModalType = {
     setModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -32,6 +33,7 @@ type FormData = {
 };
 
 export const CreateCollection = ({ modal, setModal }: ModalType) => {
+    const { userId } = useParams();
     const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>([])
     const [show, setShow] = useState<boolean>(true)
@@ -50,8 +52,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         let difference = controls.filter(c => !checkControl.includes(c));
         const disabledFields = difference.reduce((acc: any, curr: any) => (acc[curr] = false, acc), {});
         const enabledFields = checkControl.reduce((acc: any, curr: any) => (acc[curr] = true, acc), {});
-        let user = JSON.parse(localStorage.getItem("user-data") || '')
-        dispatch(fetchCreate({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(user.id) }));
+        dispatch(fetchCreate({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(userId) }));
         setModal(false)
         setTags([])
         reset();
