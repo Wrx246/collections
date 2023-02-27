@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardMedia, CardContent, Typography, Button, CardActions, Grid } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { FormattedMessage } from "react-intl"
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../shared/configs/firebase";
@@ -17,6 +17,7 @@ type CardType = {
 }
 
 export const CollectionCard = ({ collection }: CardType) => {
+    const { userId } = useParams();
     const [modal, setModal] = useState<boolean>(false)
     const [settings, setSettings] = useState<boolean>(false)
     const [edit, setEdit] = useState<boolean>(false)
@@ -25,15 +26,14 @@ export const CollectionCard = ({ collection }: CardType) => {
     const dispatch = useAppDispatch()
 
     const handleOpen = () => {
-        navigate(`/${collection.id}`)
+        navigate(`/user/${userId}/${collection.id}`)
         localStorage.setItem('collection', JSON.stringify(collection))
         localStorage.setItem('collection-settings', JSON.stringify(collection.userId))
     }
 
     const handleDelete = (e: React.MouseEvent) => {
         e.stopPropagation()
-        let user = JSON.parse(localStorage.getItem('user-data') || '')
-        dispatch(fetchDelete(Number(collection.id), Number(user.id)))
+        dispatch(fetchDelete(Number(collection.id), Number(userId)))
     }
 
     const handleLoad = () => {
@@ -46,8 +46,12 @@ export const CollectionCard = ({ collection }: CardType) => {
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        collection.userId === Number(user.id) ? setSettings(true) : setSettings(false)
-    }, [collection])
+        if (collection.userId === Number(userId) || user.name === 'admin') {
+            setSettings(true)
+        } else {
+            setSettings(false)
+        }
+    }, [collection, userId])
 
     useEffect(() => {
         const imagesListRef = ref(storage, String(collection?.image));

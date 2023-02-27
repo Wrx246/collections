@@ -38,8 +38,9 @@ export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
     const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>(collection.tags)
     const [show, setShow] = useState<boolean>(false)
-    const optional = Object.keys(collection).filter(c => controls.includes(c))
-    const [checkControl, setCheckControl] = React.useState<string[]>(optional);
+    const optional = Object.entries(collection).filter(([key, value]) => value === true)
+        .map(o => o[0])
+    const [checkControl, setCheckControl] = useState<string[]>(optional);
 
     const handleClose = () => setEdit(false);
     const dispatch = useAppDispatch()
@@ -56,8 +57,7 @@ export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
         let difference = controls.filter(c => !checkControl.includes(c));
         const disabledFields = difference.reduce((acc: any, curr: any) => (acc[curr] = false, acc), {});
         const enabledFields = checkControl.reduce((acc: any, curr: any) => (acc[curr] = true, acc), {});
-        let user = JSON.parse(localStorage.getItem("user-data") || '')
-        dispatch(fetchEdit({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(user.id) }));
+        dispatch(fetchEdit({ ...data, tags: tags, ...enabledFields, ...disabledFields, id: Number(collectionId) }));
         setEdit(false)
         setTags([])
         reset();

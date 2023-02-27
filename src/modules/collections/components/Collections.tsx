@@ -1,6 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { FormattedMessage } from "react-intl";
+import { useParams } from 'react-router-dom';
 import Preloader from '../../../shared/components/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { fetchCollections } from '../store/actions'
@@ -9,6 +10,7 @@ import { CreateButton } from './CreateButton'
 import { CreateCollection } from './CreateCollection'
 
 export const Collections = () => {
+    const { userId } = useParams();
     const { collections, isLoading } = useAppSelector(state => state.collectionsReducer)
     const dispatch = useAppDispatch()
     const [modal, setModal] = useState<boolean>(false)
@@ -16,8 +18,8 @@ export const Collections = () => {
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        if (user !== 'false') {
-            dispatch(fetchCollections(user.id))
+        if (user !== 'false' && userId) {
+            dispatch(fetchCollections(Number(userId)))
         }
     }, [])
 

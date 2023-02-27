@@ -9,6 +9,7 @@ import { itemsReducer } from "./../modules/items/";
 import { commentsReducer } from './../modules/comments/';
 import { searchReducer } from './../modules/header/';
 import { tagsReducer } from './../modules/tags/';
+import { usersReducer } from './../modules/admin/';
 
 const rootReducer = combineReducers({
   themeReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   itemsReducer,
   commentsReducer,
   searchReducer,
-  tagsReducer
+  tagsReducer,
+  usersReducer
 });
 
 export const setupStore = () => {

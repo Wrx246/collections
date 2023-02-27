@@ -7,6 +7,7 @@ import Modal from './shared/components/Modal';
 import { Login, Main, Registration, User, Item, Collection } from './shared/helpers/Lazy';
 import ProtectedRoutes from './pages/ProtectedRoutes';
 import {
+  adminPath,
   collectionPath,
   homePath,
   itemPath,
@@ -22,6 +23,7 @@ import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
 import Preloader from './shared/components/Preloader';
 import { SearchItems } from './modules/items';
+import Admin from './pages/Admin';
 
 
 function App() {
@@ -72,6 +74,7 @@ function App() {
               <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
               <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
               <Route path={`/${searchPath}`} element={<Modal><SearchItems /></Modal>} />
+              <Route path={`/${adminPath}`} element={<Modal><Admin /></Modal>} />
               <Route element={<ProtectedRoutes />}>
                 <Route path={userPath} element={<Modal><User /></Modal>} />
               </Route>

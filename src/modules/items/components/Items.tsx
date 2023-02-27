@@ -33,7 +33,11 @@ export const Items = () => {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user-data') || 'false')
         let id = JSON.parse(localStorage.getItem('collection-settings') || 'false')
-        user.id === id ? setSettings(true) : setSettings(false)
+        if (user.id === id || user.role === 'admin') {
+            setSettings(true)
+        } else {
+            setSettings(false)
+        }
     }, [])
 
     const handleSettings = (e: React.MouseEvent, id: number) => {

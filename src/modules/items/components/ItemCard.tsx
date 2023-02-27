@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -15,7 +15,6 @@ type CardType = {
 }
 
 const ItemCard = ({ item }: CardType) => {
-  const [isLike, setIsLike] = useState<boolean>(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   let date = moment(item.createdAt).format('MMMM Do YYYY')
@@ -26,7 +25,6 @@ const ItemCard = ({ item }: CardType) => {
     const options = {
       userId: Number(user.id),
       id: item.id,
-      setIsLike: setIsLike
     }
     if (item.likes.includes(Number(user.id))) {
       dispatch(fetchRemoveLike(options))
@@ -62,17 +60,11 @@ const ItemCard = ({ item }: CardType) => {
             </Typography>
           ))}
         </Box>
-        {/* <Typography variant="body2">
-          {item?.description}
-        </Typography>
-        <Typography variant="body2">
-          Author: {item?.author}
-        </Typography> */}
       </CardContent>
       <Grid container justifyContent='space-between' sx={{ pl: 1 }}>
         <Button sx={{ cursor: 'pointer' }} disabled={!user.id} onClick={handleLike}>
-          {isLike ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          <Typography component='span' sx={{ pl: 1 }}>{item.likes}</Typography>
+          {item.likes.includes(user.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          <Typography component='span' sx={{ pl: 1 }}>{item.likes.length}</Typography>
         </Button>
         <CardActions>
           <Button size="small" onClick={handleItem}>
