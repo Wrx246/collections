@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Grid, Modal, Typography, TextField } from '@mui/material'
+import { Button, Grid, Modal, Typography, TextField, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { FormattedMessage } from "react-intl"
 import { useForm } from 'react-hook-form'
@@ -19,6 +19,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    maxHeight: 800,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
@@ -80,7 +81,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
         if (user !== 'false') {
             dispatch(fetchCollections(user.id))
         }
-    },[])
+    }, [])
 
     return (
         <Modal
@@ -147,6 +148,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         id='outlined-publication-item'
                         label={<FormattedMessage id="app.checkbox.publication" />}
                         color='primary'
+                        focused 
                         variant="outlined"
                         type='date'
                         error={!!errors?.publication}
@@ -157,6 +159,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         id='outlined-foundation-item'
                         label={<FormattedMessage id="app.checkbox.foundation" />}
                         color='primary'
+                        focused 
                         variant="outlined"
                         type='date'
                         error={!!errors?.foundation}
@@ -167,6 +170,7 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         id='outlined-terminated-item'
                         label={<FormattedMessage id="app.checkbox.terminated" />}
                         color='primary'
+                        focused 
                         variant="outlined"
                         type='date'
                         error={!!errors?.terminated}
@@ -232,36 +236,21 @@ export const CreateItem = ({ modal, setModal }: ModalType) => {
                         error={!!errors?.shortName}
                         {...register("shortName", { required: "Required field!" })}
                         helperText={errors?.shortName?.message} />}
-                    {collections.status && <TextField
-                        fullWidth
-                        id='outlined-status-item'
-                        label={<FormattedMessage id="app.checkbox.status" />}
-                        color='primary'
-                        variant="outlined"
-                        type='checkbox'
-                        error={!!errors?.status}
-                        {...register("status", { required: "Required field!" })}
-                        helperText={errors?.status?.message} />}
-                    {collections.favorite && <TextField
-                        fullWidth
-                        id='outlined-favorite-item'
-                        label={<FormattedMessage id="app.checkbox.favorite" />}
-                        color='primary'
-                        variant="outlined"
-                        type='checkbox'
-                        error={!!errors?.favorite}
-                        {...register("favorite", { required: "Required field!" })}
-                        helperText={errors?.favorite?.message} />}
-                    {collections.original && <TextField
-                        fullWidth
-                        id='outlined-original-item'
-                        label={<FormattedMessage id="app.checkbox.original" />}
-                        color='primary'
-                        variant="outlined"
-                        type='checkbox'
-                        error={!!errors?.original}
-                        {...register("original", { required: "Required field!" })}
-                        helperText={errors?.original?.message} />}
+                    <FormGroup row>
+                        {collections.status && <FormControlLabel
+                            control={<Checkbox />}
+                            label={<FormattedMessage id="app.checkbox.status" />}
+                            {...register("status", { required: "Required field!" })} />}
+                        {collections.favorite && <FormControlLabel
+                            control={<Checkbox />}
+                            label={<FormattedMessage id="app.checkbox.favorite" />}
+                            {...register("favorite", { required: "Required field!" })} />}
+                        {collections.original && <FormControlLabel
+                            control={<Checkbox />}
+                            label={<FormattedMessage id="app.checkbox.original" />}
+                            {...register("original", { required: "Required field!" })} />}
+
+                    </FormGroup>
                 </>
                 }
                 <Button color='primary' variant='contained' onClick={onSubmit}>
