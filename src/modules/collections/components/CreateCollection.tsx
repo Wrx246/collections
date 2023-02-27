@@ -122,7 +122,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                         {...register("theme", { required: "Required field!" })}
                         error={!!errors?.theme}>
                         {themes.map(i => (
-                            <MenuItem key={i} value={i}>{i}</MenuItem>
+                            <MenuItem key={i} value={i}><FormattedMessage id={`app.create.theme-${i}`} /></MenuItem>
                         ))}
                     </Select>
                 </FormControl>

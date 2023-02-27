@@ -1,5 +1,13 @@
-import React from 'react'
-import { FormControl, Checkbox, InputLabel, Select, OutlinedInput, MenuItem, ListItemText, SelectChangeEvent } from '@mui/material'
+import {
+    FormControl,
+    Checkbox,
+    InputLabel,
+    Select,
+    OutlinedInput,
+    MenuItem,
+    ListItemText,
+    SelectChangeEvent
+} from '@mui/material'
 import { FormattedMessage } from "react-intl"
 
 interface OptionalTypes {

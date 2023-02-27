@@ -1,6 +1,7 @@
+import React, { useState } from 'react'
 import { Chip, Grid, Stack, TextField, Typography } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check';
-import React, { useState } from 'react'
+import { FormattedMessage } from "react-intl"
 
 const style = [
     {
@@ -48,13 +49,15 @@ export const Tags = ({ tags, setTags }: TagsTypes) => {
                 value={tag}
                 onChange={handleChange}
                 id="outlined-tags"
-                label="Tags"
+                label={<FormattedMessage id="app.create.tag" />}
                 color='primary'
                 variant="outlined"
                 type='text'
                 InputProps={{ endAdornment: <CheckIcon sx={style} onClick={addTag} /> }} />
             <Grid item>
-                {error && <Typography component='span' sx={{ color: 'red' }}>Tag already added!</Typography>}
+                {error && <Typography component='span' sx={{ color: 'red' }}>
+                    <FormattedMessage id="app.create.tag-added" />
+                </Typography>}
             </Grid>
             <Grid item container gap={1.5} xs={12} direction='row'>
                 {tags.map(t => (
