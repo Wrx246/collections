@@ -6,7 +6,7 @@ type ModalTypes = {
 }
 
 const Modal = ({ children }: ModalTypes) => {
-
+    
     return (
         <Grid container
             spacing={0}
