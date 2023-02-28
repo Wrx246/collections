@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IntlProvider } from 'react-intl';
@@ -24,11 +24,13 @@ import { setLocale } from './modules/localization/store/action';
 import Preloader from './shared/components/Preloader';
 import { SearchItems } from './modules/items';
 import Admin from './pages/Admin';
+import { checkBan } from './store/user/actions';
 
 
 function App() {
   const locale = useAppSelector(state => state.localeReducer.locale)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!JSON.parse(JSON.stringify(localStorage.getItem('app.locale')))) {
@@ -37,6 +39,13 @@ function App() {
       dispatch(setLocale(JSON.parse(JSON.stringify(localStorage.getItem('app.locale'))) || locales.EN))
     }
   }, [])
+
+  useEffect(() => {
+        let user = JSON.parse(localStorage.getItem('user-data') || 'false')
+        if(user !== 'false') {
+          dispatch(checkBan(Number(user.id), navigate))
+        }
+      }, [navigate])
 
   const themeMode = useAppSelector(state => state.themeReducer.theme)
   const theme = createTheme({
