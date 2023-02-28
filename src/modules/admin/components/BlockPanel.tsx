@@ -36,7 +36,7 @@ const style = {
 };
 
 export const BlockPanel = ({ modalBlock, setModalBlock }: ModalType) => {
-
+    moment.locale(localStorage.getItem('app.locale') || '')
     const handleClose = () => setModalBlock(false);
     const dispatch = useAppDispatch()
     const { users } = useAppSelector(state => state.usersReducer)

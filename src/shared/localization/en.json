@@ -50,6 +50,7 @@
   "app.create.description": "Description",
   "app.create.tag": "Tags",
   "app.create.tag-added": "Tag already added!",
+  "app.create.tag-empty": "Tags is required!",
   "app.create.theme": "Theme",
   "app.create.theme-Alcohol": "Alcohol",
   "app.create.theme-Books": "Books",
@@ -84,5 +85,9 @@
   "app.checkbox.not-original": "Not original",
   "app.checkbox.use-status": "Available",
   "app.checkbox.not-status": "Not available",
-  "app.components.back-button": "Back"
+  "app.components.back-button": "Back",
+  "app.admin-panel.name": "Name",
+  "app.admin-panel.active": "Active",
+  "app.admin-panel.email": "Email",
+  "app.admin-panel.created": "Created"
 }

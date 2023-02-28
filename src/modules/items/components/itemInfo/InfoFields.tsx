@@ -8,7 +8,8 @@ type InfoTypes = {
     item: ItemType | null
 }
 
-export const InfoFields = ({item}: InfoTypes) => {
+export const InfoFields = ({ item }: InfoTypes) => {
+    moment.locale(localStorage.getItem('app.locale') || '')
     return (
         <>
             {item?.author && <Typography component='span' sx={{ fontSize: 20 }}>

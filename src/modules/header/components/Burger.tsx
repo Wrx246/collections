@@ -3,13 +3,13 @@ import { Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { FormattedMessage } from "react-intl"
 import { useNavigate } from 'react-router-dom';
-import { loginPath, userPath, homePath } from '../../../shared/constants/Paths';
+import { loginPath, userPath, homePath, adminPath } from '../../../shared/constants/Paths';
 import { SwitchWidget } from '../../themeSwitcher';
 import { LocaleSelect } from '../../localization';
 
 export const Burger = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const { name } = JSON.parse(localStorage.getItem('user-data') || '')
+    const { name, role } = JSON.parse(localStorage.getItem('user-data') || '')
     const open = Boolean(anchorEl);
     const navigate = useNavigate()
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +26,11 @@ export const Burger = () => {
             localStorage.removeItem('user-data')
             navigate(path)
         } else if (path === userPath) {
-            navigate(userPath)
+            if (role === 'admin') {
+                navigate(adminPath)
+            } else {
+                navigate(userPath)
+            }
         } else {
             navigate(homePath)
         }

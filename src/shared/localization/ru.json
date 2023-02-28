@@ -12,7 +12,7 @@
   "app.user-page.body.count": "элементов",
   "app.user-page.body.sort": "Сортировать по",
   "app.user-page.body.sort-date": "Дате",
-  "app.user-page.body.sort-likes": "Лайкам",
+  "app.user-page.body.sort-likes": "Лайки",
   "app.user-page.body.sort-title": "Названию",
   "app.user-page.body.add": "Добавить",
   "app.user-page.body.edit-item": "Изменить",
@@ -50,6 +50,7 @@
   "app.create.description": "Описание",
   "app.create.tag": "Теги",
   "app.create.tag-added": "Тег уже добавлен!",
+  "app.create.tag-empty": "Необходимы теги!",
   "app.create.theme": "Тема",
   "app.create.theme-Alcohol": "Алкоголь",
   "app.create.theme-Books": "Книги",
@@ -84,5 +85,9 @@
   "app.checkbox.not-original": "Не оригинал",
   "app.checkbox.use-status": "Доступен",
   "app.checkbox.not-status": "Недоступен",
-  "app.components.back-button": "Назад"
+  "app.components.back-button": "Назад",
+  "app.admin-panel.name": "Имя",
+  "app.admin-panel.active": "Активен",
+  "app.admin-panel.email": "Почта",
+  "app.admin-panel.created": "Создано"
 }

@@ -8,6 +8,7 @@ type CommentTypes = {
 }
 
 export const Comment = ({ comment }: CommentTypes) => {
+    moment.locale(localStorage.getItem('app.locale') || '')
     let date = moment(comment.createdAt).format('MMMM Do YYYY hh:mm')
     return (
         <>

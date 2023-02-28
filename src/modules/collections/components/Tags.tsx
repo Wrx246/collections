@@ -16,10 +16,11 @@ const style = [
 
 type TagsTypes = {
     tags: string[],
-    setTags: React.Dispatch<React.SetStateAction<string[]>>
+    setTags: React.Dispatch<React.SetStateAction<string[]>>,
+    setTagError: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Tags = ({ tags, setTags }: TagsTypes) => {
+export const Tags = ({ tags, setTags, setTagError }: TagsTypes) => {
     const [tag, setTag] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
 
@@ -37,6 +38,7 @@ export const Tags = ({ tags, setTags }: TagsTypes) => {
             setTags(prev => [...prev, tag])
             setTag('')
             setError(false)
+            setTagError(false)
         } else if (tags.includes(tag)) {
             setError(true)
         }

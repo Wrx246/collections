@@ -46,6 +46,7 @@ type FormData = {
 };
 
 export const EditItem = ({ modalEdit, setModalEdit, editId }: ModalType) => {
+    moment.locale(localStorage.getItem('app.locale') || '')
     const handleClose = () => setModalEdit(false);
     const dispatch = useAppDispatch()
     const items = useAppSelector(state => state.itemsReducer.items)
