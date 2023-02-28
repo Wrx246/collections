@@ -34,6 +34,7 @@ const style = {
 };
 
 export const EditSelect = ({ selectEdit, setSelectEdit, handleSettings }: ModalType) => {
+    moment.locale(localStorage.getItem('app.locale') || '')
     const handleClose = () => setSelectEdit(false);
     const items = useAppSelector(state => state.itemsReducer.items)
 

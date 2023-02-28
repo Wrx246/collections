@@ -36,6 +36,7 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
     const { userId } = useParams();
     const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>([])
+    const [tagError, setTagError] = useState<boolean>(false)
     const [show, setShow] = useState<boolean>(true)
     const [checkControl, setCheckControl] = React.useState<string[]>([]);
 
@@ -52,6 +53,10 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
         let difference = controls.filter(c => !checkControl.includes(c));
         const disabledFields = difference.reduce((acc: any, curr: any) => (acc[curr] = false, acc), {});
         const enabledFields = checkControl.reduce((acc: any, curr: any) => (acc[curr] = true, acc), {});
+        if(!tags.length) {
+            setTagError(true)
+            return
+        }
         dispatch(fetchCreate({ ...data, tags: tags, ...enabledFields, ...disabledFields, userId: Number(userId) }));
         setModal(false)
         setTags([])
@@ -127,7 +132,10 @@ export const CreateCollection = ({ modal, setModal }: ModalType) => {
                         ))}
                     </Select>
                 </FormControl>
-                <Tags tags={tags} setTags={setTags} />
+                <Tags tags={tags} setTags={setTags} setTagError={setTagError} />
+                {tagError && <Typography component='span' sx={{ color: 'red' }}>
+                    <FormattedMessage id="app.create.tag-empty" />
+                </Typography>}
                 {show && <Button fullWidth onClick={handleShow} variant="text">
                     <FormattedMessage id="app.create.option-button" />
                 </Button>}

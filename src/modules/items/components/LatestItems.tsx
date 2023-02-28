@@ -16,13 +16,13 @@ export const LatestItems = () => {
 
     return (
         <>
-            {isLoading ? <Preloader /> :
+            {/* {isLoading ? <Preloader /> : */}
                 <Grid container flexWrap='wrap' justifyContent={matches ? 'start' : 'center'} gap={2} sx={{ mt: 2, mb: 2 }}>
                     {items?.slice(0, 5).map(i => (
                         <ItemCard key={i.id} item={i} />
                     ))}
                 </Grid>
-            }
+            {/* } */}
         </>
     )
 }

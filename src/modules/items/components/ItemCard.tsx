@@ -17,6 +17,7 @@ type CardType = {
 const ItemCard = ({ item }: CardType) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  moment.locale(localStorage.getItem('app.locale') || '')
   let date = moment(item.createdAt).format('MMMM Do YYYY')
 
   let user = JSON.parse(localStorage.getItem('user-data') || 'false')

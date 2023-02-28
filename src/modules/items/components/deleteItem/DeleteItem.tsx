@@ -35,6 +35,7 @@ const style = {
 };
 
 export const DeleteItem = ({ modalDelete, setModalDelete }: ModalType) => {
+    moment.locale(localStorage.getItem('app.locale') || '')
     const { collectionId } = useParams()
     const handleClose = () => setModalDelete(false);
     const dispatch = useAppDispatch()

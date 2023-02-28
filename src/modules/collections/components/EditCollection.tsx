@@ -37,6 +37,7 @@ export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
         .filter(c => c.id === collectionId)[0]
     const matches = useMediaQuery('(min-width:420px)');
     const [tags, setTags] = useState<string[]>(collection.tags)
+    const [tagError, setTagError] = useState<boolean>(false)
     const [show, setShow] = useState<boolean>(false)
     const optional = Object.entries(collection).filter(([key, value]) => value === true)
         .map(o => o[0])
@@ -57,6 +58,10 @@ export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
         let difference = controls.filter(c => !checkControl.includes(c));
         const disabledFields = difference.reduce((acc: any, curr: any) => (acc[curr] = false, acc), {});
         const enabledFields = checkControl.reduce((acc: any, curr: any) => (acc[curr] = true, acc), {});
+        if(!tags.length) {
+            setTagError(true)
+            return
+        }
         dispatch(fetchEdit({ ...data, tags: tags, ...enabledFields, ...disabledFields, id: Number(collectionId) }));
         setEdit(false)
         setTags([])
@@ -134,7 +139,7 @@ export const EditCollection = ({ edit, setEdit, collectionId }: ModalType) => {
                         ))}
                     </Select>
                 </FormControl>
-                <Tags tags={tags} setTags={setTags} />
+                <Tags tags={tags} setTags={setTags} setTagError={setTagError} />
                 {show && <Button fullWidth onClick={handleShow} variant="text">
                     <FormattedMessage id="app.create.option-button" />
                 </Button>}

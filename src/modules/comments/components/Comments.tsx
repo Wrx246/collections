@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Typography, Grid, CircularProgress, Paper } from '@mui/material'
+import { Typography, Grid, Paper } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux'
 import { Comment } from './Comment'
