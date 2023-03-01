@@ -15,7 +15,7 @@ type ItemInfoTypes = {
 }
 
 export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
-    const item = useAppSelector(state => state.itemsReducer.item)
+    const item = useAppSelector(state => state.itemsReducer.item!!)
     moment.locale(localStorage.getItem('app.locale') || '')
     let date = moment(item?.createdAt).format('MMMM Do YYYY')
     const dispatch = useAppDispatch()
