@@ -45,117 +45,63 @@ export const ItemTable = ({ items }: CardType) => {
             headerName: intl.formatMessage({ id: "app.checkbox.author" }),
             type: 'string',
             width: 90, 
-            hide: !item.includes('author'),
+            hide: item.includes('author'),
         },
         {
             field: 'language',
             headerName: intl.formatMessage({ id: "app.checkbox.language" }),
             type: 'string',
             width: 90, 
-            hide: !item.includes('language'),
+            hide: item.includes('language'),
         },
         {
             field: 'shortName',
             headerName: intl.formatMessage({ id: "app.checkbox.shortName" }),
             type: 'string',
             width: 90, 
-            hide: !item.includes('shortName'),
+            hide: item.includes('shortName'),
         },
         {
             field: 'comment',
             headerName: intl.formatMessage({ id: "app.checkbox.comment" }),
             type: 'string',
             width: 90, 
-            hide: !item.includes('comment'),
+            hide: item.includes('comment'),
         },
         {
             field: 'additionalInfo',
             headerName: intl.formatMessage({ id: "app.checkbox.additionalInfo" }),
             type: 'string',
             width: 90, 
-            hide: !item.includes('additionalInfo'),
+            hide: item.includes('additionalInfo'),
         },
         {
             field: 'country',
             headerName: intl.formatMessage({ id: "app.checkbox.country" }),
             type: 'string',
             width: 90,
-            hide: !item.includes('country'),
-        },
-        {
-            field: 'publication',
-            headerName: intl.formatMessage({ id: "app.checkbox.publication" }),
-            type: 'string',
-            width: 90,
-            valueFormatter(params) {
-                moment.locale(localStorage.getItem('app.locale') || '')
-                return moment(params.value).format('MMMM Do YYYY')
-            },
-            hide: !item.includes('publication'),
-        },
-        {
-            field: 'foundation',
-            headerName: intl.formatMessage({ id: "app.checkbox.foundation" }),
-            type: 'string',
-            width: 90,
-            valueFormatter(params) {
-                moment.locale(localStorage.getItem('app.locale') || '')
-                return moment(params.value).format('MMMM Do YYYY')
-            },
-            hide: !item.includes('foundation'),
-        },
-        {
-            field: 'terminated',
-            headerName: intl.formatMessage({ id: "app.checkbox.terminated" }),
-            type: 'string',
-            width: 90,
-            valueFormatter(params) {
-                moment.locale(localStorage.getItem('app.locale') || '')
-                return moment(params.value).format('MMMM Do YYYY')
-            },
-            hide: !item.includes('terminated'),
+            hide: item.includes('country'),
         },
         {
             field: 'price',
             headerName: intl.formatMessage({ id: "app.checkbox.price" }),
             type: 'number',
             width: 90,
-            hide: !item.includes('price'),
+            hide: item.includes('price'),
         },
         {
             field: 'score',
             headerName: intl.formatMessage({ id: "app.checkbox.score" }),
             type: 'number',
             width: 90, 
-            hide: !item.includes('score'),
+            hide: item.includes('score'),
         },
         {
             field: 'reward',
             headerName: intl.formatMessage({ id: "app.checkbox.reward" }),
             type: 'number',
             width: 90,
-            hide: !item.includes('reward'),
-        },
-        {
-            field: 'favorite',
-            headerName: intl.formatMessage({ id: "app.checkbox.favorite" }),
-            type: 'string',
-            width: 90,
-            hide: !item.includes('favorite'),
-        },
-        {
-            field: 'status',
-            headerName: intl.formatMessage({ id: "app.checkbox.status" }),
-            type: 'string',
-            width: 90,
-            hide: !item.includes('status'),
-        },
-        {
-            field: 'original',
-            headerName: intl.formatMessage({ id: "app.checkbox.original" }),
-            type: 'string',
-            width: 90,
-            hide: !item.includes('original'),
+            hide: item.includes('reward'),
         },
     ];
 
