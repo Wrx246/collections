@@ -15,15 +15,17 @@ export const CommentInput = () => {
         setText(e.target.value)
     }
     
-    let user = JSON.parse(JSON.stringify(localStorage.getItem('user-data')) || '')
+    let user = JSON.parse(localStorage.getItem('user-data') || 'false')
     const handleSubmit = (e: React.MouseEvent) => {
         e.preventDefault()
-        dispatch(fetchCreateComment({
-            text: text,
-            author: user.name,
-            itemId: Number(itemId)
-        }));
-        setText('');
+        if(user !== 'false') {
+            dispatch(fetchCreateComment({
+                text: text,
+                author: user.name,
+                itemId: Number(itemId)
+            }));
+            setText('');
+        }
     };
     return (
         <Grid
