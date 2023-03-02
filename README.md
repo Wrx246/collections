@@ -17,3 +17,6 @@ To run the application use this command:
 ## Register and manage your collections
 
 ![app image](./src/assets/Readme/Registration-page.png)
+## Manage users using the admin panel
+
+![app image](./src/assets/Readme/admin-page.png)
