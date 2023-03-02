@@ -7,15 +7,18 @@ import {
     ListItem,
     IconButton,
     ListItemText,
-    Divider
+    Divider,
+    Tooltip
 } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import moment from 'moment'
 import DeleteIcon from '@mui/icons-material/Delete';
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import HttpsIcon from '@mui/icons-material/Https';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/redux';
-import { userBlock, userDelete, userUnblock } from '../store/actions';
+import { userBlock, userDelete, userPromote, userUnblock } from '../store/actions';
 
 type ModalType = {
     setModalBlock: React.Dispatch<React.SetStateAction<boolean>>
@@ -42,17 +45,29 @@ export const BlockPanel = ({ modalBlock, setModalBlock }: ModalType) => {
     const { users } = useAppSelector(state => state.usersReducer)
 
     const handleBlock = (e: React.MouseEvent, id: number, isActive: boolean) => {
+        let admin = JSON.parse(localStorage.getItem('user-data') || 'false')
         e.preventDefault()
         if (isActive) {
-            dispatch(userBlock(id))
+            dispatch(userBlock({ userId: id, id: Number(admin.id) }))
         } else {
-            dispatch(userUnblock(id))
+            dispatch(userUnblock({ userId: id, id: Number(admin.id) }))
         }
     };
 
-    const handleDelete = (e: React.MouseEvent, id: number) => {
+    const handlePromote = (e: React.MouseEvent, id: number, role: string) => {
+        let admin = JSON.parse(localStorage.getItem('user-data') || 'false')
         e.preventDefault()
-        dispatch(userDelete(id))
+        if (role === 'admin') {
+            dispatch(userPromote({ userId: id, id: Number(admin.id), role: 'user' }))
+        } else if (role === 'user') {
+            dispatch(userPromote({ userId: id, id: Number(admin.id), role: 'admin' }))
+        }
+    }
+
+    const handleDelete = (e: React.MouseEvent, id: number) => {
+        let admin = JSON.parse(localStorage.getItem('user-data') || 'false')
+        e.preventDefault()
+        dispatch(userDelete({ userId: id, id: Number(admin.id) }))
     };
 
     return (
@@ -76,18 +91,30 @@ export const BlockPanel = ({ modalBlock, setModalBlock }: ModalType) => {
                         <ListItem
                             secondaryAction={
                                 <Grid container direction='row' gap={2}>
+                                    <Tooltip title={u.isActive ? 'Block' : 'Unblock'}>
+                                        <IconButton
+                                            edge="end"
+                                            aria-label="block"
+                                            onClick={(e: React.MouseEvent) => handleBlock(e, u.id, u.isActive)}>
+                                            {u.isActive ? <NoEncryptionIcon /> : <HttpsIcon />}
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title={u.role === 'admin' ? 'Downgrade' : 'Promote'}>
                                     <IconButton
                                         edge="end"
-                                        aria-label="block"
-                                        onClick={(e: React.MouseEvent) => handleBlock(e, u.id, u.isActive)}>
-                                        {u.isActive ? <NoEncryptionIcon /> : <HttpsIcon />}
+                                        aria-label="promote"
+                                        onClick={(e: React.MouseEvent) => handlePromote(e, u.id, u.role)}>
+                                        {u.role === 'user' ? <ArrowCircleUpIcon /> : <ArrowCircleDownIcon />}
                                     </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title='Delete user'>
                                     <IconButton
                                         edge="end"
                                         aria-label="delete"
                                         onClick={(e: React.MouseEvent) => handleDelete(e, u.id)}>
                                         <DeleteIcon />
                                     </IconButton>
+                                    </Tooltip>
                                 </Grid>
                             }
                         >

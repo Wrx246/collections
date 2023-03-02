@@ -14,6 +14,7 @@ export const Panel = () => {
     const intl = useIntl()
     const [modalBlock, setModalBlock] = useState<boolean>(false)
     const { users } = useAppSelector(state => state.usersReducer)
+    const user = JSON.parse(localStorage.getItem('user-data') || 'false')
     const handleEvent: GridEventListener<'rowClick'> = (
         params
     ) => {
@@ -23,6 +24,12 @@ export const Panel = () => {
     const blockUser = (e: React.MouseEvent) => {
         e.preventDefault()
         setModalBlock(true)
+    }
+
+    const handleCollection = () => {
+        if (user !== 'false') {
+            navigate(`/user/${user.id}`)
+        }
     }
 
     useEffect(() => {
@@ -61,9 +68,14 @@ export const Panel = () => {
                 <Typography sx={{ fontWeight: 700 }} variant='h4'>
                     <FormattedMessage id="app.admin-page.header.users" />
                 </Typography>
-                <Button onClick={blockUser}>
-                    <FormattedMessage id="app.administration-user.header" />
-                </Button>
+                <Grid item>
+                    {user.name !== 'admin' && <Button onClick={handleCollection}>
+                        <FormattedMessage id="app.administration-collection.header" />
+                    </Button>}
+                    <Button onClick={blockUser}>
+                        <FormattedMessage id="app.administration-user.header" />
+                    </Button>
+                </Grid>
             </Grid>
             <BlockPanel modalBlock={modalBlock} setModalBlock={setModalBlock} />
             <DataGrid

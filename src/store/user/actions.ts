@@ -1,10 +1,9 @@
-
 import { AppDispatch } from "..";
 import { API } from "../../shared/api/api";
 import { userSlice } from "./slice";
 
 
-export const checkBan =
+export const checkUser =
   (userId: number, navigate: (arg: string) => void) =>
   async (dispatch: AppDispatch) => {
     try {
@@ -15,6 +14,8 @@ export const checkBan =
         localStorage.removeItem("user-data");
         localStorage.removeItem("user-token");
         navigate("/login");
+      } else {
+        localStorage.setItem('user-data', JSON.stringify(response.data.member))
       }
     } catch (error: any) {
       dispatch(

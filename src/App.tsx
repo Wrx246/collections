@@ -24,7 +24,7 @@ import { setLocale } from './modules/localization/store/action';
 import Preloader from './shared/components/Preloader';
 import { SearchItems } from './modules/items';
 import Admin from './pages/Admin';
-import { checkBan } from './store/user/actions';
+import { checkUser } from './store/user/actions';
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
   useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user-data') || 'false')
         if(user !== 'false') {
-          dispatch(checkBan(Number(user.id), navigate))
+          dispatch(checkUser(Number(user.id), navigate))
         }
       }, [navigate])
 

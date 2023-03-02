@@ -9,6 +9,7 @@
   "app.search-page.header.items": "Найденные элементы",
   "app.admin-page.header.users": "Пользователи",
   "app.administration-user.header": "Управление",
+  "app.administration-collection.header": "Мои коллекции",
   "app.user-page.body.count": "элементов",
   "app.user-page.body.sort": "Сортировать по",
   "app.user-page.body.sort-date": "Дате",

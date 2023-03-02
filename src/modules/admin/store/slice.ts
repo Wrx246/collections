@@ -29,6 +29,22 @@ export const usersSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    updateFetching(state) {
+      state.isLoading = true;
+    },
+    updateFetchingSuccess(state, action: PayloadAction<UserType>) {
+      state.isLoading = false;
+      state.error = "";
+      state.users = [
+        ...state.users.map((c) =>
+          c.id === action.payload.id ? (c = action.payload) : c
+        ),
+      ];
+    },
+    updateFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
