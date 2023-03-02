@@ -9,6 +9,7 @@
   "app.search-page.header.items": "Search items",
   "app.admin-page.header.users": "Users",
   "app.administration-user.header": "Administration",
+  "app.administration-collection.header": "My collections",
   "app.user-page.body.count": "items",
   "app.user-page.body.sort": "Sort by",
   "app.user-page.body.sort-date": "Date",

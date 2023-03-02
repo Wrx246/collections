@@ -14,10 +14,15 @@ export const fetchUsers = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const userBlock = (userId: number) => async (dispatch: AppDispatch) => {
+type AdminOptions = {
+  userId: number,
+  id: number
+}
+
+export const userBlock = (options: AdminOptions) => async (dispatch: AppDispatch) => {
   try {
     dispatch(usersSlice.actions.usersFetching());
-    const response = await API.put(`admin/user/block`, { userId: userId });
+    const response = await API.put(`admin/user/block`, options);
     dispatch(usersSlice.actions.usersFetchingSuccess(response.data.users));
   } catch (error: any) {
     dispatch(
@@ -26,10 +31,10 @@ export const userBlock = (userId: number) => async (dispatch: AppDispatch) => {
   }
 };
 
-export const userUnblock = (userId: number) => async (dispatch: AppDispatch) => {
+export const userUnblock = (options: AdminOptions) => async (dispatch: AppDispatch) => {
   try {
     dispatch(usersSlice.actions.usersFetching());
-    const response = await API.put(`admin/user/unblock`, { userId: userId });
+    const response = await API.put(`admin/user/unblock`, options);
     dispatch(usersSlice.actions.usersFetchingSuccess(response.data.users));
   } catch (error: any) {
     dispatch(
@@ -38,14 +43,30 @@ export const userUnblock = (userId: number) => async (dispatch: AppDispatch) => 
   }
 };
 
-export const userDelete = (userId: number) => async (dispatch: AppDispatch) => {
+export const userDelete = (options: AdminOptions) => async (dispatch: AppDispatch) => {
     try {
       dispatch(usersSlice.actions.usersFetching());
-      const response = await API.delete(`admin/user/delete`, { data: userId });
+      const response = await API.delete(`admin/user/delete`, {data: options});
       dispatch(usersSlice.actions.usersFetchingSuccess(response.data.users));
     } catch (error: any) {
       dispatch(
         usersSlice.actions.usersFetchingError(error.response.data.message)
+      );
+    }
+  };
+
+  interface AdminPromote extends AdminOptions {
+    role: string
+  }
+
+export const userPromote = (options: AdminPromote) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(usersSlice.actions.updateFetching());
+      const response = await API.put(`admin/user/promote`, options);
+      dispatch(usersSlice.actions.updateFetchingSuccess(response.data.user));
+    } catch (error: any) {
+      dispatch(
+        usersSlice.actions.updateFetchingError(error.response.data.message)
       );
     }
   };
