@@ -18,6 +18,7 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
     const item = useAppSelector(state => state.itemsReducer.item!!)
     moment.locale(localStorage.getItem('app.locale') || '')
     let date = moment(item?.createdAt).format('MMMM Do YYYY')
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export const ItemInfo = ({ itemId }: ItemInfoTypes) => {
                     <Typography sx={{ fontSize: 35 }} component='h2'>
                         {item?.title}
                     </Typography>
-                    {item?.favorite && <>{item?.favorite ? <GradeIcon /> : <StarOutlineIcon />}</> }
+                    {item?.favorite && <>{item?.favorite ? <GradeIcon /> : <StarOutlineIcon />}</>}
                 </Grid>
                 <Typography sx={{ color: 'GrayText' }} component='span'>
                     <FormattedMessage id="app.item-card.body.created" />: {date}

@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { TextField, FormControlLabel, Checkbox, FormGroup } from '@mui/material'
 import { FormattedMessage } from "react-intl"
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import moment from 'moment'
@@ -167,39 +167,20 @@ export const EditField = ({ items, register, errors }: FieldTypes) => {
                 defaultValue={items?.shortName}
                 {...register("shortName", { required: "Required field!" })}
                 helperText={errors?.shortName?.message} />}
-            {items.status && <TextField
-                fullWidth
-                id='outlined-status-item'
-                label={<FormattedMessage id="app.checkbox.status" />}
-                color='primary'
-                variant="outlined"
-                type='checkbox'
-                error={!!errors?.status}
-                defaultValue={items?.status}
-                {...register("status", { required: "Required field!" })}
-                helperText={errors?.status?.message} />}
-            {items.favorite && <TextField
-                fullWidth
-                id='outlined-favorite-item'
-                label={<FormattedMessage id="app.checkbox.favorite" />}
-                color='primary'
-                variant="outlined"
-                type='checkbox'
-                error={!!errors?.favorite}
-                defaultValue={items?.favorite}
-                {...register("favorite", { required: "Required field!" })}
-                helperText={errors?.favorite?.message} />}
-            {items.original && <TextField
-                fullWidth
-                id='outlined-original-item'
-                label={<FormattedMessage id="app.checkbox.original" />}
-                color='primary'
-                variant="outlined"
-                type='checkbox'
-                error={!!errors?.original}
-                defaultValue={items?.original}
-                {...register("original", { required: "Required field!" })}
-                helperText={errors?.original?.message} />}
+            <FormGroup row>
+                {items.status && <FormControlLabel
+                    control={<Checkbox defaultChecked={items?.status} />}
+                    label={<FormattedMessage id="app.checkbox.status" />}
+                    {...register("status", { required: "Required field!" })} />}
+                {items.favorite && <FormControlLabel
+                    control={<Checkbox defaultChecked={items?.favorite} />}
+                    label={<FormattedMessage id="app.checkbox.favorite" />}
+                    {...register("favorite", { required: "Required field!" })} />}
+                {items.original && <FormControlLabel
+                    control={<Checkbox defaultChecked={items?.original} />}
+                    label={<FormattedMessage id="app.checkbox.original" />}
+                    {...register("original", { required: "Required field!" })} />}
+            </FormGroup>
         </>
     )
 }

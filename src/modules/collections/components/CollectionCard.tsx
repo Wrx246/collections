@@ -63,6 +63,8 @@ export const CollectionCard = ({ collection }: CardType) => {
         })
     }, [collection])
 
+    console.log(image)
+
     return (
         <Card sx={{ width: 240 }}>
             <FileLoader
