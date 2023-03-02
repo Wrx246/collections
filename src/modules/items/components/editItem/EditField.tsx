@@ -32,7 +32,6 @@ interface FieldTypes {
 
 export const EditField = ({ items, register, errors }: FieldTypes) => {
     moment.locale(localStorage.getItem('app.locale') || '')
-
     return (
         <>
             {items.author && <TextField
@@ -75,8 +74,9 @@ export const EditField = ({ items, register, errors }: FieldTypes) => {
                 color='primary'
                 variant="outlined"
                 type='date'
+                focused
                 error={!!errors?.publication}
-                defaultValue={moment(items?.publication).format('yyyy-MM-dd')}
+                defaultValue={moment(items?.publication).format('YYYY-MM-DD')}
                 {...register("publication", { required: "Required field!" })}
                 helperText={errors?.publication?.message} />}
             {items.foundation && <TextField
@@ -86,8 +86,9 @@ export const EditField = ({ items, register, errors }: FieldTypes) => {
                 color='primary'
                 variant="outlined"
                 type='date'
+                focused
                 error={!!errors?.foundation}
-                defaultValue={items?.foundation}
+                defaultValue={moment(items?.foundation).format('YYYY-MM-DD')}
                 {...register("foundation", { required: "Required field!" })}
                 helperText={errors?.foundation?.message} />}
             {items.terminated && <TextField
@@ -98,7 +99,8 @@ export const EditField = ({ items, register, errors }: FieldTypes) => {
                 variant="outlined"
                 type='date'
                 error={!!errors?.terminated}
-                defaultValue={items?.terminated}
+                focused
+                defaultValue={moment(items?.terminated).format('YYYY-MM-DD')}
                 {...register("terminated", { required: "Required field!" })}
                 helperText={errors?.terminated?.message} />}
             {items.price && <TextField
