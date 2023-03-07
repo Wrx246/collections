@@ -18,7 +18,12 @@ export const Popular = () => {
     return (
         <>
             {isLoading ? <Preloader /> :
-                <Grid container flexWrap='wrap' justifyContent={matches ? 'start' : 'center'} gap={2} sx={{ mt: 2, mb: 2 }}>
+                <Grid
+                    container
+                    flexWrap='wrap'
+                    justifyContent={matches ? 'start' : 'center'}
+                    gap={2}
+                    sx={{ mt: 2, mb: 2 }}>
                     {!collections && <Typography variant="h6">
                         <FormattedMessage id="app.main-page.collections-not-found" />
                     </Typography>}

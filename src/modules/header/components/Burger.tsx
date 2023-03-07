@@ -9,7 +9,7 @@ import { LocaleSelect } from '../../localization';
 
 export const Burger = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const { name, role } = JSON.parse(localStorage.getItem('user-data') || '')
+    const { name, role } = JSON.parse(localStorage.getItem('user-data') || 'false')
     const open = Boolean(anchorEl);
     const navigate = useNavigate()
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,9 +66,9 @@ export const Burger = () => {
                 <MenuItem>
                     <LocaleSelect />
                 </MenuItem>
-                {name && <MenuItem onClick={() => handleNavigate(userPath)}>
+                {name !== 'false' ? <MenuItem onClick={() => handleNavigate(userPath)}>
                     {name}
-                </MenuItem>}
+                </MenuItem> : <></>}
                 {name ?
                     <MenuItem onClick={() => handleNavigate(loginPath)}>
                         <FormattedMessage id="app.header.logout-button" />
