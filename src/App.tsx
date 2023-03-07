@@ -1,30 +1,15 @@
-import { Suspense, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import { CssBaseline, Grid } from '@mui/material';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
+import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IntlProvider } from 'react-intl';
-import Modal from './shared/components/Modal';
-import { Login, Main, Registration, User, Item, Collection } from './shared/helpers/Lazy';
-import ProtectedRoutes from './pages/ProtectedRoutes';
-import {
-  adminPath,
-  collectionPath,
-  homePath,
-  itemPath,
-  loginPath,
-  registrationPath,
-  searchPath,
-  userPath
-} from './shared/constants/Paths';
 import { useAppDispatch, useAppSelector } from './shared/hooks/redux';
 import locales from './shared/constants/Locales';
 import enMessages from './shared/localization/en.json'
 import ruMessages from './shared/localization/ru.json'
 import { setLocale } from './modules/localization/store/action';
-import Preloader from './shared/components/Preloader';
-import { SearchItems } from './modules/items';
-import Admin from './pages/Admin';
 import { checkUser } from './store/user/actions';
+import { RouterWrap } from './shared/components/RouterWrap';
 
 
 function App() {
@@ -40,12 +25,12 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('user-data') || 'false')
-        if(user !== 'false') {
-          dispatch(checkUser(Number(user.id), navigate))
-        }
-      }, [navigate])
+  // useEffect(() => {
+  //   let user = JSON.parse(localStorage.getItem('user-data') || 'false')
+  //   if (user !== 'false') {
+  //     dispatch(checkUser(Number(user.id), navigate))
+  //   }
+  // }, [navigate])
 
   const themeMode = useAppSelector(state => state.themeReducer.theme)
   const theme = createTheme({
@@ -69,27 +54,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <IntlProvider locale={locale} messages={messages[locale]}>
-        <Grid container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          style={{ minHeight: '100vh' }}>
-          <Suspense fallback={<Preloader />}>
-            <Routes>
-              <Route path={loginPath} element={<Login />} />
-              <Route path={registrationPath} element={<Registration />} />
-              <Route path={homePath} element={<Modal><Main /></Modal>} />
-              <Route path={`/${collectionPath}`} element={<Modal><Collection /></Modal>} />
-              <Route path={`/${itemPath}`} element={<Modal><Item /></Modal>} />
-              <Route path={`/${searchPath}`} element={<Modal><SearchItems /></Modal>} />
-              <Route path={`/${adminPath}`} element={<Modal><Admin /></Modal>} />
-              <Route element={<ProtectedRoutes />}>
-                <Route path={userPath} element={<Modal><User /></Modal>} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </Grid>
+        <RouterWrap />
       </IntlProvider>
     </ThemeProvider>
   );
