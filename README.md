@@ -1,6 +1,6 @@
 # Collections App
 
-App for user collections [Deploy](https://fanciful-florentine-8b6b86.netlify.app).
+App for user collections [Deploy](https://web-collections.netlify.app).
 
 ## How to start app
 
